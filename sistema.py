@@ -1,9 +1,9 @@
-from menu_inicial import menu_inicial, menu_login
+from Menus import *
+from Usuario import *
+from CadastroUsuarios import *
 import os
 op = "0"
-#2
-#user = "nulo"
-#password = "nulo"
+
 def limpaTela():
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -14,14 +14,15 @@ def autentica(user,password):
         teste = False
     return teste
 
-def cadastroUsuario():
+def wiki():
     print("Em produção...")
 
 while(op!="q"):
     limpaTela()
     menu_login()
-    op2 = input()
-    if(op2 == "1"):
+    op1 = input()
+    if(op1 == "1"): #Opção de Login
+        limpaTela()
         user = input("Usuário: ")
         password = input("Senha: ")
 
@@ -34,8 +35,18 @@ while(op!="q"):
         else:
             print("Erro!")
     
-    elif(op2 == "2"):
-        cadastroUsuario()
-    op =  input()
+    elif (op1 == "2"): #Opção de Cadastro de novos usuários
+        limpaTela()
+        novo = cadastroUsuario()
+        print("Novo usuário:", novo.nome)
+        continuar = input("Gostaria de fazer login? (s/n)")
+        if(continuar == "s"):
+            op1 = 1
+        else:
+            op = "q"
+    elif(op1 == "q"):
+        op = "q"
+    else:
+        op =  input()
 limpaTela()
-print("Encerrando..")
+print("Encerrando...")

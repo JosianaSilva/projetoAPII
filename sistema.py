@@ -1,8 +1,14 @@
 from Menus import *
 from Usuario import *
 from CadastroUsuarios import *
+from Wiki import *
+from time import sleep
 import os
+
+
+from Wiki import executaWiki
 op = "0"
+op2 = "0"
 
 def limpaTela():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -31,7 +37,16 @@ while(op!="q"):
 
         if logado:
             menu_inicial()
-            op = input()
+            op2 = input()
+
+            if(op2=="1"): #Wiki
+                executaWiki()
+                op2 = "0"
+            elif(op2=="q"): #Opção de sair
+                logado = False
+            else:
+                print("Em desenvolvimento...")
+                sleep(2)
         else:
             print("Erro!")
     

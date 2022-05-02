@@ -2,6 +2,7 @@ from Menus import *
 from Usuario import *
 from CadastroUsuarios import *
 from Wiki import *
+from Quiz import *
 from time import sleep
 import os
 
@@ -41,6 +42,9 @@ while(op!="q"):
 
             if(op2=="1"): #Wiki
                 executaWiki()
+                op2 = "0"
+            elif(op2=="4"):
+                MenuQuizWorks()
                 op2 = "0"
             elif(op2=="q"): #Opção de sair
                 logado = False

@@ -66,4 +66,4 @@ class PerguntaQz:
 pergunta1 = PerguntaQz("Quem lidera o projeto?", "a)Fabrício\nb)Humberto\nc)Izaac\nd)João Victor\ne)Josiana\n","e")
 
 #chamar a função para testar:
-MenuQuizWorks()
+# MenuQuizWorks()

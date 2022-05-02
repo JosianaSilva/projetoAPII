@@ -37,20 +37,24 @@ while(op!="q"):
         limpaTela()
 
         if logado:
-            menu_inicial()
-            op2 = input()
+            while(logado):
+                limpaTela()
+                menu_inicial()
+                op2 = input()
 
-            if(op2=="1"): #Wiki
-                executaWiki()
-                op2 = "0"
-            elif(op2=="4"):
-                MenuQuizWorks()
-                op2 = "0"
-            elif(op2=="q"): #Opção de sair
-                logado = False
-            else:
-                print("Em desenvolvimento...")
-                sleep(2)
+                if(op2=="1"): #Wiki
+                    executaWiki()
+                    # op2 = "0"
+                elif(op2=="4"):
+                    MenuQuizWorks()
+                    # op2 = "0"
+                elif(op2=="q"): #Opção de sair
+                    logado = False
+                    print("Saindo...")
+                    sleep(2)
+                else:
+                    print("Em desenvolvimento...")
+                    sleep(2)
         else:
             print("Erro!")
     

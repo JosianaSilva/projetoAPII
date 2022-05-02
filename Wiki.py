@@ -11,8 +11,7 @@ def escolha():
 
 def MenuWiki():
     menu = """
-    \tcode.Academy\n
-    Wiki 
+\tWiki - code.Academy\n 
 1. Ver termos
 2. Procurar termo
 3. Voltar
@@ -91,4 +90,4 @@ def executaWiki():
 
         else:
             opW = input()
-executaWiki()
+# executaWiki()

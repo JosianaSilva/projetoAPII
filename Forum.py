@@ -110,6 +110,5 @@ def main_forum_menu():
             opcao = opcao2
         else:
             print("Erro")
-
-        
+ 
 main_forum_menu()

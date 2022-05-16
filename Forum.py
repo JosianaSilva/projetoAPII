@@ -14,7 +14,7 @@ def bem_vindo():
     sleep(2)
     limpaTela()
 
-def deseja_continuar(x):
+def deseja_continuar(x): ##será implementado
     print('Você está indo acessar ' '\033[1m' + x + '\033[0m'+"."' Deseja continuar?')
     desejo = input("s/n")
 
@@ -96,19 +96,25 @@ def comentar_post():
 #editar_post()
 
 def main_forum_menu():
-    bem_vindo()
-    menu_inicial_forum()
-    opcao = 0    
-    while opcao != 4:
-        opcao2 = int(input("Digite a sua opção: \n")) 
-        if opcao2 == 1:
+    bem_vindo()    
+    repeat = True 
+    while repeat == True:
+        menu_inicial_forum()
+        opcao = input()
+        if opcao == "1":
             limpaTela()
             ver_posts()
-        elif opcao2 == 2:
+        elif opcao == "2":
             novo_post()
-        elif opcao2 == 4:
-            opcao = opcao2
+        elif opcao == "3":
+            limpaTela()
+            print("Ainda será implementado")          
+        elif opcao == "4":
+            repeat = False 
+            limpaTela()
         else:
-            print("Erro")
- 
+            limpaTela()
+            print("Opção inválida.")
+            sleep(1)
+
 main_forum_menu()

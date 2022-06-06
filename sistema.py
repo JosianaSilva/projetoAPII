@@ -5,71 +5,103 @@ from Wiki import *
 from Quiz import *
 from time import sleep
 import os
-
-
+from getpass import getpass
 from Wiki import executaWiki
-op = "0"
-op2 = "0"
 
 def limpaTela():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+def hash_(string):
+    return hashlib.md5(string.encode()).hexdigest() 
+
 def autentica(user,password):  
-    if(user != "") and (password != ""):
-        teste = True
+    if(cad.procurarUsuario(user)):
+        if(hash_(password) == cad.getSenha(user)):
+            return True
+        else:
+            print("senha incorreta")
     else:
-        teste = False
-    return teste
+        print("Usuário não encontrado")
+    return False
 
-def wiki():
-    print("Em produção...")
+def usuarioLogado(user):
+    try:
+        usuario = cad.getUsuario(user)
+        return usuario
+    except:
+        raise Exception("Erro!")
 
-while(op!="q"):
+def loginAutorizado(usuario):
     limpaTela()
-    menu_login()
-    op1 = input()
-    if(op1 == "1"): #Opção de Login
-        limpaTela()
-        user = input("Usuário: ")
-        password = input("Senha: ")
+    print("Olá, ",usuario.nome,"!")
+    menu_inicial()
+    nivel_2 = input()
+    if(nivel_2=="1"): #Wiki
+        executaWiki(usuario)
+        loginAutorizado(usuario)
+    elif(nivel_2=="2"):
+        print("Módulos em desenvolvimento..")
+        loginAutorizado(usuario)
+    elif(nivel_2=="3"):
+        print("Fórum em desenvolvimento..")
+        loginAutorizado(usuario)
+    elif(nivel_2=="4"):
+        MenuQuizWorks()
+        loginAutorizado(usuario)
+    elif(nivel_2=="q"): #Opção de sair
+        principal()
+        print("Saindo...")
+        sleep(2)
 
-        logado = autentica(user,password)
-        limpaTela()
-
-        if logado:
-            while(logado):
-                limpaTela()
-                menu_inicial()
-                op2 = input()
-
-                if(op2=="1"): #Wiki
-                    executaWiki()
-                    # op2 = "0"
-                elif(op2=="4"):
-                    MenuQuizWorks()
-                    # op2 = "0"
-                elif(op2=="q"): #Opção de sair
-                    logado = False
-                    print("Saindo...")
-                    sleep(2)
-                else:
-                    print("Em desenvolvimento...")
-                    sleep(2)
-        else:
-            print("Erro!")
+def principal():
+    limpaTela()
+    menu()
+    nivel_1 = input()
     
-    elif (op1 == "2"): #Opção de Cadastro de novos usuários
+    if(nivel_1 == "1"): #Opção de Login
+        def login(): 
+            limpaTela()
+            user = input("Usuário: ")
+            password = getpass("Senha: ")
+
+            logado = autentica(user,password)
+
+            if logado:
+                usuario = usuarioLogado(user)
+                
+                loginAutorizado(usuario)
+            else:
+                print("Erro! Usuário ou senha incorretos.")
+                sleep(3)
+                continuar = input("Gostaria de tentar novamente? (s/n) ")
+                if(continuar == "s"):
+                    login()
+                else:
+                    principal()
+
+        login()
+    
+    elif (nivel_1 == "2"): #Opção de Cadastro de novos usuários
         limpaTela()
-        novo = cadastroUsuario()
-        print("Novo usuário:", novo.nome)
-        continuar = input("Gostaria de fazer login? (s/n)")
-        if(continuar == "s"):
-            op1 = 1
+        
+        cad.mostrarUsuariosCadastrados()
+        novo = cad.cadastroUsuario()
+
+        if(cad.procurarUsuario(novo)):
+            print(novo.nome, "cadastrado com sucesso!")
+            continuar = input("Gostaria de fazer login? (s/n)")
+            if(continuar == "s"):
+                loginAutorizado(novo)
+            else:
+                principal()
         else:
-            op = "q"
-    elif(op1 == "q"):
-        op = "q"
-    else:
-        op =  input()
+            print("Erro no cadastro :(")
+            sleep(3)
+            principal()
+    elif(nivel_1 == "q"):
+        print("Encerrando...")
+        sleep(5)
+
+cad = cadastroUsuario("cadastroUsuarios.db")
+principal()
 limpaTela()
-print("Encerrando...")

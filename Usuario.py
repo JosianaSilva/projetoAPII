@@ -10,6 +10,18 @@ class Usuario():
         print("Nome:", self.nome, 
         "\nEmail: ", self.email,
         "\nPontuação:", self.pontosQuiz)
+    
+    def getId(self):
+        return self.id
+    
+    def getPontosQuiz(self):
+        return self.pontosQuiz
+
+    def aumentaPontos(self, pts):
+        self.pontosQuiz += pts
+    
+    def mostrarScore(self):
+        print(f"{self.nome} : {self.pontosQuiz} pontos")
 
 # exemplo de criação de usuário:
 # user1 = user("Maria","maria@gmail.com", 1978,0,1)

@@ -1,7 +1,7 @@
 from Usuario import *
 import sqlite3
 import pickle as pk
-from functions import hash_, getpass
+from functions import hash_, getpass, random
 
 class cadastroUsuario:
     def __init__(self, database):

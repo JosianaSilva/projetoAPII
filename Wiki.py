@@ -1,15 +1,7 @@
-import os
-from time import sleep
 from Menus import MenuWiki
+from functions import *
 
-def limpaTela():
-    sleep(1)
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-# Interrompe o programa e chama o método executaWiki assim q o usuário der Enter
-def continua(usuario):
-    input("Clique Enter para voltar")
-    executaWiki(usuario)
+    
 
 termos = []
 
@@ -83,15 +75,17 @@ def executaWiki(usuario):
     if(opW=="1"): #Ver todos os termos
         limpaTela()
         verTermos()
-        continua(usuario) #interrompe o programa e chama o método executaWiki assim q o usuário der Enter
+        continua() #interrompe o programa e chama o método executaWiki assim q o usuário der Enter
+        executaWiki(usuario)
     elif(opW=="2"): #Procurar um termo
         limpaTela()
         palavra = input("Buscar por: ")
         procurarTermo(palavra)
-        continua(usuario)
+        continua()
+        executaWiki(usuario)
+
     elif(opW == "3"):
         leTermosDoArquivo()
-        # continua(usuario)
         print("Encerrando wiki..")
     else:
         print("Opção inválida")

@@ -1,9 +1,7 @@
 from Usuario import *
-# import Usuario as us
 import sqlite3
-import hashlib
-import random
 import pickle as pk
+from functions import hash_, getpass
 
 class cadastroUsuario:
     def __init__(self, database):
@@ -29,8 +27,8 @@ class cadastroUsuario:
     def cadastroUsuario(self):
         nome = input("Nome: ")
         email = input("email: ")
-        senha = input("Senha: ")
-        senha = hashlib.md5(senha.encode()).hexdigest()
+        senha = getpass("Senha: ")
+        senha = hash_(senha)
         pontos = 0
         maiorPontuacao = 0
         id = random.randint(1111,9999)
@@ -104,7 +102,6 @@ class cadastroUsuario:
         con.close()
         return usuario
 
-    
 
 # Procura a senha a partir do nome de usuário fornecido:
     def getSenha(self,username):

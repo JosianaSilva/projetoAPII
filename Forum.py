@@ -117,4 +117,4 @@ def main_forum_menu():
             print("Opção inválida.")
             sleep(1)
 
-main_forum_menu()
+# main_forum_menu()

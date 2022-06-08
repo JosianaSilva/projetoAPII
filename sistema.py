@@ -1,19 +1,12 @@
 from Menus import *
 from Usuario import *
 from CadastroUsuarios import *
+from Forum import main_forum_menu
 from Wiki import *
 from Quiz import *
 from Configuracoes import executaConfig
-from time import sleep
-import os
-from getpass import getpass
+from functions import *
 
-def limpaTela():
-    sleep(1 )
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-def hash_(string):
-    return hashlib.md5(string.encode()).hexdigest() 
 
 def autentica(username,password):  
     if(cad.procurarUsuario(username)):
@@ -44,7 +37,7 @@ def loginAutorizado(usuario):
         print("Módulos em desenvolvimento..")
         loginAutorizado(usuario)
     elif(nivel_2=="3"):
-        print("Fórum em desenvolvimento..")
+        main_forum_menu()
         loginAutorizado(usuario)
     elif(nivel_2=="4"):
         MenuQuizWorks()

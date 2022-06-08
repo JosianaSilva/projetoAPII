@@ -2,20 +2,10 @@
 # do usuário, enviando-as para o banco de dados
 
 import sqlite3
-import hashlib
-import os
-from time import sleep
 from Menus import menuConfig1, menuConfig2
+from functions import *
 
 database = "cadastroUsuarios.db"
-
-def continua(usuario):
-    input("Clique Enter para voltar")
-    executaConfig(usuario)
-
-def limpaTela():
-    sleep(2)
-    os.system('cls' if os.name == 'nt' else 'clear')
 
 def atualizaNome(_id, nomeNovo):
         con = sqlite3.connect(database)
@@ -56,7 +46,8 @@ def executaConfig(usuario):
     op = input()
     if(op == "1"):
         usuario.mostrarPerfil()
-        continua(usuario)
+        continua()
+        executaConfig(usuario)
     elif(op == "2"):
         atualizacoes(usuario)
     elif(op == "3"):
@@ -80,7 +71,7 @@ def atualizacoes(usuario):
         atualizaEmail(usuario.id, email)
         atualizacoes(usuario)
     elif(op1 == "3"):
-        senhaAtual = input("Confirme sua senha atual: ")
+        senhaAtual = getpass("Confirme sua senha atual: ")
         senha = hashlib.md5(senhaAtual.encode()).hexdigest()
         if(senha == usuario.senha):
             usuario.setSenha(senha)

@@ -1,25 +1,15 @@
 import os
 from time import sleep
+from Menus import MenuWiki
 
 def limpaTela():
+    sleep(1)
     os.system('cls' if os.name == 'nt' else 'clear')
 
 # Interrompe o programa e chama o método executaWiki assim q o usuário der Enter
 def continua(usuario):
-    escolha = input("Clique Enter para voltar")
+    input("Clique Enter para voltar")
     executaWiki(usuario)
-    # escolha = "n"
-    # while(escolha!="s"):
-    #     escolha = input("Deseja voltar? (s/n) ")
-
-def MenuWiki():
-    menu = """
-\tWiki - code.Academy\n 
-1. Ver termos
-2. Procurar termo
-3. Voltar
-    """ 
-    print(menu)
 
 termos = []
 
@@ -50,6 +40,18 @@ def verTermos():
         t.mostrarTermo()
         print("")
 
+def leTermosDoArquivo():
+    with open(r'arquivos\termosWiki.txt', 'r', encoding="utf-8") as arquivo:
+        for linha in arquivo:
+            trecho = linha.split(";")
+            termo = Termo(trecho[0],trecho[1],trecho[2])
+            print(termo.nome, ": ",termo.definicao)
+            exemplos = str(termo.exemplos[0])
+            exemplos = exemplos.format()
+            print(exemplos, "\n")
+            termo.mostrarTermo()
+    arquivo.close()
+
 def procurarTermo(palavraChave):
     resultado = "Resultado da busca: "
     for t in termos:
@@ -57,15 +59,10 @@ def procurarTermo(palavraChave):
             print(resultado)
             t.mostrarTermo()
             return True
-        else:
-            resultado = palavraChave + " não encontrado"
+        
+    resultado = palavraChave + " não encontrado"
     print(resultado)
     return False
-
-        
-    if(procurarTermo(palavraChave)!=True):
-        resultado = palavraChave + " não encontrado"
-        print(resultado)
 
 #Instanciando alguns termos de teste: 
 termo1 = Termo("append","É uma função de listas usada para adicionar um item à lista", "lista.append(novo item)" )
@@ -80,22 +77,22 @@ termo2.adicionarExemplo(exemplo)
 
 def executaWiki(usuario):
     limpaTela()
-    print("Olá, ",usuario.nome,"!")
+    print("\tOlá, ",usuario.nome,"!")
     MenuWiki() #Mostra as opções
-    opW2 = input()
-    if(opW2=="1"): #Ver todos os termos
+    opW = input()
+    if(opW=="1"): #Ver todos os termos
         limpaTela()
         verTermos()
         continua(usuario) #interrompe o programa e chama o método executaWiki assim q o usuário der Enter
-    elif(opW2=="2"): #Procurar um termo
+    elif(opW=="2"): #Procurar um termo
         limpaTela()
         palavra = input("Buscar por: ")
         procurarTermo(palavra)
         continua(usuario)
-    elif(opW2 == "3"):
+    elif(opW == "3"):
+        leTermosDoArquivo()
+        # continua(usuario)
         print("Encerrando wiki..")
-        sleep(3)
     else:
         print("Opção inválida")
-        sleep(3)
         executaWiki(usuario)

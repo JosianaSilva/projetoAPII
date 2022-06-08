@@ -3,6 +3,7 @@ from Usuario import *
 import sqlite3
 import hashlib
 import random
+import pickle as pk
 
 class cadastroUsuario:
     def __init__(self, database):
@@ -16,32 +17,36 @@ class cadastroUsuario:
                 nome VARCHAR(100) not null,
                 email VARCHAR(200),
                 pontos NUMERIC,
+                maiorPontuacao NUMERIC,
                 senha VARCHAR(32),
                 PRIMARY KEY (_id)
                 );
-        """)
+        """) 
         con.commit()
         con.close()
 
-
+# Função responsável por instanciar um novo usuário e colocar seus dados no BD
     def cadastroUsuario(self):
         nome = input("Nome: ")
         email = input("email: ")
         senha = input("Senha: ")
         senha = hashlib.md5(senha.encode()).hexdigest()
         pontos = 0
-        # _id = 1+len(usersDicionario.values())
-        _id = random.randint(1111,9999)
+        maiorPontuacao = 0
+        id = random.randint(1111,9999)
+        historico = [0]
 
-        newUser = Usuario(nome,email,senha,pontos,_id) 
+        newUser = Usuario(nome,email,senha,pontos,maiorPontuacao,id) 
+
+        caminho = "arquivos\\HistoricoArquivos\\" + str(newUser.id) +".score"
+        pk.dump(historico, open(caminho, "wb"))
         #mudar essa parte para o sistema ↑
-        usersDicionario[_id] = newUser
-        print("Usuário cadastrado com    sucesso!")
-
+        usersDicionario[id] = newUser
+    
         con = sqlite3.connect(self.database)
         cursor = con.cursor()
-        consultaInsert = "INSERT INTO usuario (_id,nome, email, senha, pontos) VALUES (?,?,?,?,?);"
-        cursor.execute(consultaInsert,(_id,nome,email,senha,pontos))
+        consultaInsert = "INSERT INTO usuario (_id,nome, email, senha, pontos, maiorPontuacao) VALUES (?,?,?,?,?,?);"
+        cursor.execute(consultaInsert,(id,nome,email,senha,pontos,maiorPontuacao))
         con.commit()
         con.close()
 
@@ -54,26 +59,25 @@ class cadastroUsuario:
         consulta = "SELECT nome, email, pontos FROM usuario;"
         cursor.execute(consulta)
         for linha in cursor.fetchall():
-            print(f"Nome: {linha[0]}\nE-mail: {linha[1]}\nPontuação:{linha[2]}")
+            print(f"Nome: {linha[0]} | E-mail: {linha[1]} | Pontuação:{linha[2]}")
         con.commit()
         con.close()
         # for id in usersDicionario.keys():
         #     usersDicionario[id].mostrarPerfil()
 
-    def procurarUsuario(self, user):
-
+# Procura no BD o usuário a partir do nome:
+    def procurarUsuario(self, username):
         con = sqlite3.connect(self.database)
         cursor =  con.cursor()
 
-        consulta = "SELECT * from usuario WHERE nome = ?;"
+        consulta = "SELECT * FROM usuario WHERE nome = ?;"
         
         try:
-            consulta = cursor.execute(consulta, (user,))
-            r = consulta.fetchall()
-            if(r[0][1] == user):
+            consulta = cursor.execute(consulta, (username,))
+            objTemp = consulta.fetchall() # objTemp vai armazenar o objeto
+            if(objTemp[0][1] == username): # objTemp[0][1] armazena o nome
                 return True
         except:
-            # print("Não encontrado")
             return False
         con.commit()
         con.close()
@@ -84,37 +88,34 @@ class cadastroUsuario:
         #     else:
         #         return False
     
+# Monta o objeto Usuário a partir do nome e compara com os dados do BD:
     def getUsuario(self, user):
         con = sqlite3.connect(self.database)
         cursor =  con.cursor()
 
-        consulta = """
-        SELECT * from usuario WHERE nome = ?; 
-        """
+        consulta = " SELECT * FROM usuario WHERE nome = ?; "
         cursor.execute(consulta, (user,))
 
         dados = cursor.fetchall()
-        #[(1, 'Jo', 's@', 0, '202cb962ac59075b964b07152d234b70')]
-        # teste = Usuario("nome", email, senha, pontos, id)
-        usuario = Usuario(dados[0][1], dados[0][2],dados[0][4],dados[0][3],dados[0][0])
-        return usuario
-
+        # instanciando um usuário (nome, email, senha, pontosQuiz, maiorPontuacao, id):
+        usuario = Usuario(dados[0][1],dados[0][2], dados[0][5],dados[0][4],dados[0][3],dados[0][0])
+        
         con.commit()
         con.close()
+        return usuario
 
+    
 
-    def getSenha(self,user):
+# Procura a senha a partir do nome de usuário fornecido:
+    def getSenha(self,username):
         con = sqlite3.connect(self.database)
         cursor =  con.cursor()
 
-        consulta = """
-        SELECT * from usuario WHERE nome = ?; 
-        """
-        cursor.execute(consulta, (user,))
+        consulta = "SELECT * from usuario WHERE nome = ?;"
+        cursor.execute(consulta, (username,))
         if(cursor != ""):
-            # print(cursor)
             for l in cursor.fetchall():
-                senha = l[4]
+                senha = l[5]
                 return senha
         else:
             print("Não encontrado")

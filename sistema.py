@@ -6,6 +6,7 @@ from Wiki import *
 from Quiz import *
 from Configuracoes import executaConfig
 from functions import *
+from menuModulos import *
 
 
 def autentica(username,password):  
@@ -34,7 +35,7 @@ def loginAutorizado(usuario):
         executaWiki(usuario)
         loginAutorizado(usuario)
     elif(nivel_2=="2"):
-        print("Módulos em desenvolvimento..")
+        execultarModulos()
         loginAutorizado(usuario)
     elif(nivel_2=="3"):
         main_forum_menu()

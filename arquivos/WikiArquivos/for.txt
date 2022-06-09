@@ -1,0 +1,5 @@
+for
+estrutura de repetição que executa uma quantidade predefinida de iterações por meio de uma variável de controle
+for i in range(0,10):
+    print(i, end=" ")
+    print(f' Este é {i+1}º número da sequência! \n')

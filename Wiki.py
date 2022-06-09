@@ -1,9 +1,12 @@
+from os import truncate
 from Menus import MenuWiki
 from functions import *
 
     
-
+# Esta lista é destinada aos objetos Termo
 termos = []
+# A lista a seguir contém o nome dos termos já salvos e é usada para ler os arquivos respectivos a cada termo
+termosSalvos = ["for", "append","while"]
 
 class Termo:
     def __init__(self, nome, definicao,exemplo):
@@ -14,12 +17,13 @@ class Termo:
      
     def mostrarTermo(self):
         corpoTermo = self.nome + ": "+ self.definicao +"\nExemplo(s):\n\t" 
-        linhaTabela = "-------------------------------------------------------"
-        print(2*linhaTabela)
+        divisao = 4*"----------------------------------"
+        print(divisao)
         print(corpoTermo)
-        for e in self.exemplos:
-            print(e)
-        print(2*linhaTabela)
+        for exemplo in self.exemplos:
+            for linha in exemplo:
+                print(linha)
+        print(divisao)
     
     def adicionarExemplo(self, ex):
         self.exemplos.append(ex)
@@ -32,17 +36,20 @@ def verTermos():
         t.mostrarTermo()
         print("")
 
-def leTermosDoArquivo():
-    with open(r'arquivos\termosWiki.txt', 'r', encoding="utf-8") as arquivo:
-        for linha in arquivo:
-            trecho = linha.split(";")
-            termo = Termo(trecho[0],trecho[1],trecho[2])
-            print(termo.nome, ": ",termo.definicao)
-            exemplos = str(termo.exemplos[0])
-            exemplos = exemplos.format()
-            print(exemplos, "\n")
-            termo.mostrarTermo()
-    arquivo.close()
+# O objetivo da seguinte função é buscar os arquivos com as informações e convertê-las em objeto
+def leArquivosdeTermos():
+    for cada in termosSalvos:
+        caminho = 'arquivos\\WikiArquivos\\'+ cada + '.txt'
+        with open(caminho, 'r', encoding="utf-8") as arquivo:
+            trecho = []
+            for linha in arquivo:
+                trecho.append(linha)
+            termo = Termo(trecho[0],trecho[1],trecho[2:])
+            nomeSemEspaço =""
+            nomeSemEspaço = termo.nome.split()
+            termo.nome = nomeSemEspaço[0] # Apenas para remover espaços vazios
+            adicionarTermo(termo)
+        arquivo.close()
 
 def procurarTermo(palavraChave):
     resultado = "Resultado da busca: "
@@ -50,26 +57,14 @@ def procurarTermo(palavraChave):
         if(t.nome == palavraChave):
             print(resultado)
             t.mostrarTermo()
-            return True
-        
+            return True    
     resultado = palavraChave + " não encontrado"
     print(resultado)
     return False
 
-#Instanciando alguns termos de teste: 
-termo1 = Termo("append","É uma função de listas usada para adicionar um item à lista", "lista.append(novo item)" )
-adicionarTermo(termo1)
-termo2 = Termo("for","estrutura de repetição que executa uma quantidade predefinida de iterações por meio de uma variável de controle","for i in range(0,10):\n\t\tprint(i)")
-adicionarTermo(termo2)
-exemplo = """
-for item in lista:
-    print(item)
-"""
-termo2.adicionarExemplo(exemplo)
-
 def executaWiki(usuario):
     limpaTela()
-    print("\tOlá, ",usuario.nome,"!")
+    leArquivosdeTermos()
     MenuWiki() #Mostra as opções
     opW = input()
     if(opW=="1"): #Ver todos os termos
@@ -85,7 +80,7 @@ def executaWiki(usuario):
         executaWiki(usuario)
 
     elif(opW == "3"):
-        leTermosDoArquivo()
+
         print("Encerrando wiki..")
     else:
         print("Opção inválida")

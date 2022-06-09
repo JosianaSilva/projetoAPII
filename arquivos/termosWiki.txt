@@ -1,3 +1,0 @@
-append;É uma função de listas usada para adicionar um item à lista;lista.append(novo item)
-for;estrutura de repetição que executa uma quantidade predefinida de iterações por meio de uma variável de controle;for i in range(0,10):\n\t\tprint(i)
-while;estrutura de repetição que executa enquanto uma condição for atendida;while(condition==True):\n continue

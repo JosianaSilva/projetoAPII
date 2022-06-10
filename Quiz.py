@@ -1,9 +1,10 @@
 ###Tem que importar o comando de limpar a tela e o tempo###
 from time import sleep
 import os
+
+#função para limpar a tela
 def limpaTela():
     os.system('cls' if os.name == 'nt' else 'clear')
-###Tem que importar o comando de limpar a tela e o tempo###
 
 ### função provisória para exibir mensagem das opções ###
 def showMsg(mensagem):
@@ -18,9 +19,8 @@ def MenuQuizShow():
 menu de quizes - code.Academy:
 ------------------------------
 1. Iniciar Quiz
-2. Ver pontuação
-3. Histórico
-4. Voltar(encerra)
+2. Histórico
+3. Voltar(encerra)
 """)
 
 #Função para transitar no menu#
@@ -35,26 +35,22 @@ def MenuQuizWorks():
             pergunta1.askQuestion()
             sleep(3)
         elif optMQ=="2":
-            showMsg("Não há pontuações para mostrar.")
-        elif optMQ=="3":
             showMsg("Não há histórico para mostrar.")           
-        elif optMQ=="4":
+        elif optMQ=="3":
             repeat=False #quando o usuário pede para sair a condição é alterada e quebra o loop, era pra voltar pro menu principal
             limpaTela()
         else:
             showMsg("Opção inválida!")
 
-
-
+#Criação da classe pergunta
 class PerguntaQz:
-    def __init__(self,enunciado,alternativas,gabarito):
-        self.enunciado=enunciado
-        self.alternativas = alternativas
+    def __init__(self,id,texto,gabarito):
+        self.id = id
+        self.texto=texto
         self.gabarito = gabarito.lower()
     
     def askQuestion(self):
-        print(self.enunciado) 
-        print(self.alternativas)
+        print(self.texto)
         userAnswer = (input())
         if userAnswer==self.gabarito:
             limpaTela()
@@ -63,7 +59,8 @@ class PerguntaQz:
             limpaTela()
             print("errou!")
 
-pergunta1 = PerguntaQz("Quem lidera o projeto?", "a)Fabrício\nb)Humberto\nc)Izaac\nd)João Victor\ne)Josiana\n","e")
+#Pergunta de teste
+pergunta1 = PerguntaQz(1,"Quem lidera o projeto?\n[a)Fabrício\nb)Humberto\nc)Izaac\nd)João Victor\ne)Josiana\n","e")
 
 #chamar a função para testar:
 # MenuQuizWorks()

@@ -27,6 +27,7 @@ def usuarioLogado(username):
         raise Exception("Erro! Não foi possível recuperar os dados do usuário.")
 
 def loginAutorizado(usuario):
+    limpaTela_(0)
     msg = "Bem-vinda(o) de volta, [blue]"+ usuario.nome + "!"
     print(Panel.fit(msg))
     limpaTela_(2)

@@ -53,7 +53,7 @@ def executaConfig(usuario):
     elif(op == "3"):
         print("...")
     else:
-        print("Opção inválida!")
+        msgErro("Opção inválida!")
         executaConfig(usuario)
 
 def atualizacoes(usuario):
@@ -83,5 +83,5 @@ def atualizacoes(usuario):
         print("Voltando...")
         executaConfig(usuario)
     else:
-        print("Opção inválida!")
+        msgErro("Opção inválida!")
         atualizacoes(usuario)

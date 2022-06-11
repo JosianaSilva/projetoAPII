@@ -16,10 +16,10 @@ class Usuario():
 
 
         perfil = f"""
-        ■   [bold]Nome:[/] {self.nome}                     
-        ■   [bold]Email:[/] {self.email}                    
-        ■   [bold]Pontos:[/] [green]{self.pontosQuiz}[/]              
-        ■   [bold]Maior Pontuação:[/] [green]{self.maiorPontuacao}[/] 
+        ♦   [bold]Nome:[/] {self.nome}                     
+        ♦   [bold]Email:[/] {self.email}                    
+        ♦   [bold]Pontos:[/] [green]{self.pontosQuiz}[/]              
+        ♦   [bold]Maior Pontuação:[/] [green]{self.maiorPontuacao}[/] 
         """
         print(Panel.fit(perfil, title="Perfil"))
     

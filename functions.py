@@ -28,8 +28,10 @@ def continua():
     input("Clique Enter para voltar")
 
 def msgErro(msg):
-    print(msg)
-    # console.status(msg)
+    print("",msg)
+    sleep(1)
+    print("Tente novamente.")
+    limpaTela_(1)
 
 # Função responsável por criar o hash da senha para armazená-la no BD de forma mais segura:
 def hash_(string):

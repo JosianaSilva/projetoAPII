@@ -89,5 +89,5 @@ def executaWiki(usuario):
     elif(opW == "3"):
         print("Encerrando wiki..")
     else:
-        print("Opção inválida")
+        msgErro("Opção inválida")
         executaWiki(usuario)

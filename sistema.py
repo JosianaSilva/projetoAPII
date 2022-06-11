@@ -1,7 +1,7 @@
 from Menus import *
 from Usuario import *
 from CadastroUsuarios import *
-from Forum import main_forum_menu
+from Forum import *
 from Wiki import *
 from Quiz import *
 from Configuracoes import executaConfig
@@ -39,7 +39,7 @@ def loginAutorizado(usuario):
         execultarModulos()
         loginAutorizado(usuario)
     elif(nivel_2=="3"):
-        main_forum_menu()
+        main_forum_menu(usuario)
         loginAutorizado(usuario)
     elif(nivel_2=="4"):
         MenuQuizWorks()

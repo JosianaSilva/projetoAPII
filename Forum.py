@@ -1,16 +1,11 @@
-from time import sleep
-import os
-import sqlite3
+from functions import *
 from Menus import menu_inicial
-from Usuario import Usuario
+from CadastroUsuarios import *
+from Usuario import *
 
-
-def limpaTela():
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-def bem_vindo():
+def bem_vindo(usuario):
     limpaTela()
-    print(f"Seja bem-vindo(a) ao fórum, #usuario!") #temporário, será acossiado a um usuário criado
+    print(f"Seja bem-vindo(a) ao fórum, {usuario.nome}!")
     sleep(2)
     limpaTela()
 
@@ -19,10 +14,11 @@ def deseja_continuar(x): ##será implementado
     desejo = input("s/n")
 
 def menu_inicial_forum():
-    print("""Fórum code.Academy (?)
+    print("""Fórum code.Academy
     1. Mostrar postagens
     2. Fazer uma postagem
     3. Procurar postagem
+    4. Editar postagem
     4. Sair""")
 
 def cria_tabela_forum():
@@ -30,25 +26,23 @@ def cria_tabela_forum():
     cursor = banco.cursor()
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS posts (
-    usuario VARCHAR(20) NOT NULL PRIMARY KEY,
+    usuario TEXT NOT NULL PRIMARY KEY,
     titulo TEXT NOT NULL,
-    texto TEXT NOT NULL
+    texto TEXT NOT NULL,
+    comentarios TEXT
     );
     """)
     banco.commit()
     banco.close()
 
-def novo_post(): #adiciona um post ao banco de dados do fórum
+def novo_post(usuario): #adiciona um post ao banco de dados do fórum
     limpaTela()
     print("Fazer um post:")
-    usuario = input("Usuário:") ##temporário, será associado a um usuário cadastrado no db de usuários
-    titulo = str(input("Título:"))
+    titulo = str(input("Título:\n"))
     texto = input("Texto da postagem:\n")
     banco = sqlite3.connect("forum_database.db")
     cursor = banco.cursor()
-#    titulo_n = '\033[1m' + titulo 
-#    cursor.execute("UPDATE posts SET titulo = ?",(titulo_n,))
-    cursor.execute("INSERT INTO posts (usuario, titulo, texto) VALUES (?,?,?)",(usuario,titulo,texto))
+    cursor.execute("INSERT OR IGNORE INTO posts (usuario, titulo, texto) VALUES (?,?,?)",(usuario.nome,titulo,texto))
     print("Postado!")               
     banco.commit()
     banco.close()
@@ -64,23 +58,21 @@ def ver_posts():
         print("-"*10)
     banco.close
 
-def editar_post():
+def editar_post(usuario):
     limpaTela()
     banco = sqlite3.connect("forum_database.db")
     cursor = banco.cursor()
-    nome_usuario = input()
-    novo_titulo = input()
-    novo_texto = input()
+    novo_titulo = input("Novo título:\n")
+    novo_texto = input("Novo texto:\n")
     cursor.execute("""UPDATE posts SET titulo = ?, texto = ? WHERE usuario = ?"""
-    ,(novo_titulo,novo_texto,nome_usuario)) 
+    ,(novo_titulo,novo_texto,usuario.nome)) 
     banco.commit()
 
-def deletar_post():
+def deletar_post(usuario):
     limpaTela()
-    nome_usuario = input()
     banco = sqlite3.connect("forum_database.db")
     cursor = banco.cursor()
-    cursor.execute("DELETE FROM posts WHERE usuario = ?",(nome_usuario,))
+    cursor.execute("DELETE FROM posts WHERE usuario = ?",(usuario.nome,))
     banco.commit()
 
 def comentar_post():
@@ -90,13 +82,14 @@ def comentar_post():
     print("Função a ser implementada")
 
 #cria_tabela_forum()
-#novo_p()
+#novo_post()
 #deletar_post()
 #ver_posts()
 #editar_post()
 
-def main_forum_menu():
-    bem_vindo()    
+def main_forum_menu(usuario):
+    cria_tabela_forum()
+    bem_vindo(usuario)    
     repeat = True 
     while repeat == True:
         menu_inicial_forum()
@@ -105,16 +98,17 @@ def main_forum_menu():
             limpaTela()
             ver_posts()
         elif opcao == "2":
-            novo_post()
+            novo_post(usuario)
         elif opcao == "3":
             limpaTela()
-            print("Ainda será implementado")          
+            print("Ainda será implementado")       
         elif opcao == "4":
+            limpaTela()
+            editar_post(usuario)   
+        elif opcao == "5":
             repeat = False 
             limpaTela()
         else:
             limpaTela()
             print("Opção inválida.")
             sleep(1)
-
-# main_forum_menu()

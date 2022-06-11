@@ -14,9 +14,9 @@ def autentica(username,password):
         if(hash_(password) == cad.getSenha(username)):
             return True
         else:
-            print("senha incorreta")
+            print("Senha incorreta!")
     else:
-        print("Usuário não encontrado")
+        print("Usuário não encontrado!")
     return False
 
 def usuarioLogado(username):
@@ -27,8 +27,9 @@ def usuarioLogado(username):
         raise Exception("Erro! Não foi possível recuperar os dados do usuário.")
 
 def loginAutorizado(usuario):
-    limpaTela()
-    print("Olá, ",usuario.nome,"!")
+    msg = "Bem-vinda(o) de volta, [blue]"+ usuario.nome + "!"
+    print(Panel.fit(msg))
+    limpaTela_(2)
     menu_inicial()
     nivel_2 = input()
     if(nivel_2=="1"): #Wiki
@@ -46,9 +47,12 @@ def loginAutorizado(usuario):
     elif(nivel_2=="5"):
         executaConfig(usuario)
         loginAutorizado(usuario)
-    elif(nivel_2=="q"): #Opção de sair
+    elif(nivel_2=="X"): #Opção de sair
         principal()
         print("Saindo...")
+    else:
+        msgErro("Opção inválida!")
+        loginAutorizado(usuario)
 
 def principal():
     limpaTela()
@@ -58,7 +62,8 @@ def principal():
     if(nivel_1 == "1"): #Opção de Login
         def login(): 
             limpaTela()
-            username = input("Usuário: ")
+            formataTitulo(" Login ")
+            username = input("\nUsuário: ")
             password = getpass("Senha: ")
 
             logado = autentica(username,password)
@@ -76,8 +81,8 @@ def principal():
     
     elif (nivel_1 == "2"): #Opção de Cadastro de novos usuários
         limpaTela()
-        print("==== Área de cadastro ====")
-        cad.mostrarUsuariosCadastrados()
+        formataTitulo(" Área de cadastro ")
+        # cad.mostrarUsuariosCadastrados()
         novo = cad.cadastroUsuario()
 
         if(cad.procurarUsuario(novo.nome)):
@@ -90,10 +95,13 @@ def principal():
         else:
             print("Erro no cadastro :(")
             principal()
-    elif(nivel_1 == "q"):
+    elif(nivel_1 == "X"):
         print("Encerrando...")
-        sleep(5)
+        sleep(3)
+    else:
+        msgErro("Opção inválida!")
+        principal()
 
 cad = cadastroUsuario("cadastroUsuarios.db")
 principal()
-limpaTela()
+limpaTela_(1)

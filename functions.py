@@ -6,14 +6,31 @@ import os
 from getpass import getpass
 import hashlib
 import random
+from rich.console import Console
+from rich import print
+from rich.panel import Panel
 
-def limpaTela():
-    sleep(1)
+console = Console()
+
+def limpaTela_(s):
+    sleep(s)
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def hash_(string):
-    return hashlib.md5(string.encode()).hexdigest() 
+def limpaTela():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+# Faz a formatação do título:
+def formataTitulo(titulo):
+    console.rule("[bold blue]"+titulo, style="on blue", align="center")
 
 # Interrompe o programa e continua a execução assim que o usuário "der" Enter
 def continua():
     input("Clique Enter para voltar")
+
+def msgErro(msg):
+    print(msg)
+    # console.status(msg)
+
+# Função responsável por criar o hash da senha para armazená-la no BD de forma mais segura:
+def hash_(string):
+    return hashlib.md5(string.encode()).hexdigest() 

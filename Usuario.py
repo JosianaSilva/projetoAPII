@@ -1,5 +1,6 @@
 from collections import deque
 import pickle as pk
+from functions import *
 
 # from Configuracoes import atualizaEmail, atualizaNome, atualizaSenha
 class Usuario():
@@ -12,15 +13,15 @@ class Usuario():
         self.id = id
 
     def mostrarPerfil(self):
+
+
         perfil = f"""
-    -------------------------------------------
-    |   Nome:  {self.nome}                     
-    |   Email: {self.email}                    
-    |   Pontos: {self.pontosQuiz}              
-    |   Maior Pontuação: {self.maiorPontuacao} 
-    -------------------------------------------
+        ■   [bold]Nome:[/] {self.nome}                     
+        ■   [bold]Email:[/] {self.email}                    
+        ■   [bold]Pontos:[/] [green]{self.pontosQuiz}[/]              
+        ■   [bold]Maior Pontuação:[/] [green]{self.maiorPontuacao}[/] 
         """
-        print(perfil)
+        print(Panel.fit(perfil, title="Perfil"))
     
     def mostrarHistorico(self):
         tam = len(self.historicoUsuario)

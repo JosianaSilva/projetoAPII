@@ -17,16 +17,23 @@ class Termo:
      
     def mostrarTermo(self):
         corpoTermo = self.nome + ": "+ self.definicao +"\nExemplo(s):\n\t" 
-        divisao = 4*"----------------------------------"
-        print(divisao)
+        # divisao = 4*"----------------------------------"
+        # print(divisao)
+        console.print(" ", style="on blue", justify="center")
         print(corpoTermo)
         for exemplo in self.exemplos:
             for linha in exemplo:
-                print(linha)
-        print(divisao)
+                print(linha) 
+        # print(divisao)
     
-    def adicionarExemplo(self, ex):
-        self.exemplos.append(ex)
+    def formatoTermo(self):
+        corpoTermo = self.nome + ": "+ self.definicao +"\nExemplo(s):\n\t" 
+        texto  = ""
+        texto = corpoTermo
+        for exemplo in self.exemplos:
+            for linha in exemplo:
+                texto += linha 
+        return texto
 
 def adicionarTermo(termo):
     termos.append(termo)
@@ -34,7 +41,6 @@ def adicionarTermo(termo):
 def verTermos():
     for t in termos:
         t.mostrarTermo()
-        print("")
 
 # O objetivo da seguinte função é buscar os arquivos com as informações e convertê-las em objeto
 def leArquivosdeTermos():
@@ -52,15 +58,17 @@ def leArquivosdeTermos():
         arquivo.close()
 
 def procurarTermo(palavraChave):
-    resultado = "Resultado da busca: "
-    for t in termos:
-        if(t.nome == palavraChave):
-            print(resultado)
-            t.mostrarTermo()
-            return True    
-    resultado = palavraChave + " não encontrado"
-    print(resultado)
-    return False
+    with console.status("[blue]Procurando...[/]") as pesquisa:
+        limpaTela_(3)
+        resultado = "\nResultado da busca: "
+        for t in termos:
+            if(t.nome == palavraChave):
+                console.print(resultado, style="bold underline")
+                t.mostrarTermo()
+                return True    
+        resultado = palavraChave + " não encontrado!"
+        console.print(resultado, style="bold underline")
+        return False
 
 def executaWiki(usuario):
     limpaTela()
@@ -78,9 +86,7 @@ def executaWiki(usuario):
         procurarTermo(palavra)
         continua()
         executaWiki(usuario)
-
     elif(opW == "3"):
-
         print("Encerrando wiki..")
     else:
         print("Opção inválida")

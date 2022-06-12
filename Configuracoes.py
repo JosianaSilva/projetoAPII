@@ -61,9 +61,9 @@ def apagar(usuario):
     id = usuario.id
     con = sqlite3.connect(database)
     cursor =  con.cursor()
-    consulta = "DELETE * FROM usuario WHERE _id = ?; "
+    consulta = "DELETE FROM usuario WHERE _id = ?; "
     cursor.execute(consulta, (id,))
-    print("Apagado com sucesso. ")
+    print(usuario.id," Apagado com sucesso. ")
     con.commit()
     con.close()
 
@@ -78,7 +78,12 @@ def executaConfig(usuario):
     elif(op == "2"):
         atualizacoes(usuario)
     elif(op == "3"):
-        apagar(usuario)
+        prosseguir = input("Tem certeza que deseja excluir seu perfil? (s/n) \nIsso será irreversível. ")
+        if(prosseguir=="s"):
+            apagar(usuario)
+            continua()
+        else:
+            executaConfig(usuario)
     elif(op == "4"):
         print("Saindo..")
     else:

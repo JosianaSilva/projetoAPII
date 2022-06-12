@@ -54,10 +54,10 @@ class cadastroUsuario:
         con = sqlite3.connect(self.database)
         cursor =  con.cursor()
 
-        consulta = "SELECT nome, email, pontos FROM usuario;"
+        consulta = "SELECT nome, email, pontos, _id FROM usuario;"
         cursor.execute(consulta)
         for linha in cursor.fetchall():
-            print(f"Nome: {linha[0]} | E-mail: {linha[1]} | Pontuação:{linha[2]}")
+            print(f"Nome: {linha[0]} | E-mail: {linha[1]} | Pontuação:{linha[2]} | {linha[3]}")
         con.commit()
         con.close()
         # for id in usersDicionario.keys():

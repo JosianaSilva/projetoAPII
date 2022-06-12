@@ -30,9 +30,9 @@ def loginAutorizado(usuario):
     limpaTela_(0)
     msg = "Bem-vinda(o) de volta, [blue]"+ usuario.nome + "!"
     print(Panel.fit(msg))
-    limpaTela_(2)
+    limpaTela_(1)
     menu_inicial()
-    nivel_2 = input()
+    nivel_2 = input().upper()
     if(nivel_2=="1"): #Wiki
         executaWiki(usuario)
         loginAutorizado(usuario)
@@ -58,7 +58,8 @@ def loginAutorizado(usuario):
 def principal():
     limpaTela()
     menu()
-    nivel_1 = input()
+    # cad.mostrarUsuariosCadastrados()
+    nivel_1 = input().upper()
     
     if(nivel_1 == "1"): #Opção de Login
         def login(): 
@@ -83,7 +84,6 @@ def principal():
     elif (nivel_1 == "2"): #Opção de Cadastro de novos usuários
         limpaTela()
         formataTitulo(" Área de cadastro ")
-        # cad.mostrarUsuariosCadastrados()
         novo = cad.cadastroUsuario()
 
         if(cad.procurarUsuario(novo.nome)):

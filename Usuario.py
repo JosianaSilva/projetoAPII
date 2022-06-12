@@ -14,8 +14,6 @@ class Usuario():
         self.id = id
 
     def mostrarPerfil(self):
-
-
         perfil = f"""
         ♦   [bold]Nome:[/] {self.nome}                     
         ♦   [bold]Email:[/] {self.email}                    
@@ -40,7 +38,6 @@ class Usuario():
         hisFormatado = ""
         for i in range(len(historico)-1,-1,-1):
             hisFormatado += str(historico[i]) + " "
-            # hisFormatado += ponto + " "
         print(f"""Últimas pontuções: {
         {hisFormatado}
         }""")
@@ -54,19 +51,14 @@ class Usuario():
     def setEmail(self, novoEmail):
         self.email = novoEmail
 
-
     def adicionaPontosAoHistorico(self, novaPontuacao):
         historicoUsuario = self.getHistorico()
-
         tam = len(historicoUsuario)
         
         if(tam==10):
             historicoUsuario.popleft()
         historicoUsuario.append(novaPontuacao)
         self.aumentaPontos(novaPontuacao)
-        # if(tam > 10):
-        #     while(tam>10):
-        #         historicoUsuario.popleft()
 
         # Na próxima linha será sobrescrito o histórico, adicionando as alterações
         pk.dump(historicoUsuario, open("arquivos\\HistoricoArquivos\\" + str(self.id) +".score", "wb"))
@@ -74,8 +66,6 @@ class Usuario():
             self.maiorPontuacao = novaPontuacao
             atualizaMaiorPontuacao(self.id, self.maiorPontuacao)
     
-
-
     def getPontosQuiz(self):
         return self.pontos
 
@@ -83,10 +73,5 @@ class Usuario():
         self.pontos += pts
         atualizaPontos(self.id, self.pontos)
 
-
     def mostrarScore(self):
         print(f"{self.nome} : {self.pontos} pontos")
-
-# exemplo de criação de usuário:
-# user1 = user("Maria","maria@gmail.com", 1978,0,1)
-# user1.mostrarPerfil()

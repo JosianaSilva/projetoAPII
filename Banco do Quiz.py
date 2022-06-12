@@ -1,8 +1,7 @@
-from re import I
-from select import select
 import sqlite3
 from Quiz import *
-from functions import continua
+from functions import *
+
 
 def iniciar():
     bancoDePerguntas = sqlite3.connect("perguntas.db")
@@ -14,39 +13,45 @@ a text NOT NULL,
 b text NOT NULL,
 c text NOT NULL,
 d text NOT NULL,
-gabarito VARCHAR(1));""")
+gabarito VARCHAR(1),
+valor INTEGER);""")
     bancoDePerguntas.commit()
     bancoDePerguntas.close()
+
 
 def inserirPergunta():
     id = int(input("ID: "))
     enunciado = input("enunciado: ")
-    a =  input()
-    b =  input()
-    c =  input()
-    d =  input() 
+    a =  input("a: ")
+    b =  input("b: ")
+    c =  input("c: ")
+    d =  input("d: ") 
     gabarito = input("Gabarito: ")
+    valor = int(input("Valor: "))
     bancoDePerguntas = sqlite3.connect("perguntas.db")
     cursor =  bancoDePerguntas.cursor()
-    cursor.execute("INSERT INTO perguntas (id, enunciado, a, b, c, d, gabarito) VALUES(?,?,?,?,?,?,?);",(id,enunciado,a,b,c,d,gabarito))
+    cursor.execute("INSERT INTO perguntas (id, enunciado, a, b, c, d, gabarito, valor) VALUES(?,?,?,?,?,?,?,?);",(id,enunciado,a,b,c,d,gabarito,valor))
     bancoDePerguntas.commit()
     bancoDePerguntas.close()
+
 
 def editarPergunta():
     id_a_editar = int(input("Digite o id da pergunta que deseja editar: " ))
     novo_id = int(input("Novo ID: "))
-    novo_a =  input()
-    novo_b =  input()
-    novo_c =  input()
-    novo_d =  input() 
     novo_enunciado = input("Novo enunciado: ")
+    novo_a =  input("a: ")
+    novo_b =  input("b: ")
+    novo_c =  input("c: ")
+    novo_d =  input("d: ") 
     novo_gabarito = input("Novo gabarito: ")
+    novo_valor = int(input("novo valor: "))
     con = sqlite3.connect("perguntas.db")
     cursor = con.cursor()
-    edicao = "UPDATE perguntas SET id = ?, enunciado = ?, a = ?, b = ?, c = ?, d = ?, gabarito = ? WHERE id = ?"
-    cursor.execute(edicao,(novo_id, novo_enunciado, novo_a, novo_b, novo_c, novo_d, novo_gabarito, id_a_editar))
+    edicao = "UPDATE perguntas SET id = ?, enunciado = ?, a = ?, b = ?, c = ?, d = ?, gabarito = ?, valor = ? WHERE id = ?"
+    cursor.execute(edicao,(novo_id, novo_enunciado, novo_a, novo_b, novo_c, novo_d, novo_gabarito, novo_valor, id_a_editar))
     con.commit()
     con.close()
+
 
 def listarPerguntas():
     con = sqlite3.connect("perguntas.db")
@@ -56,14 +61,17 @@ def listarPerguntas():
     for linha in cursor.fetchall():
         print(f"""ID: {linha[0]}
 Enunciado: {linha[1]}
-A{linha[2]}
-B{linha[3]}
-C{linha[4]}
-D{linha[5]}
+|A) {linha[2]}
+|B) {linha[3]}
+|C) {linha[4]}
+|D) {linha[5]}
 Gabarito: {linha[6]}
+Valor: {linha[7]}
 """)
     print("----- fim da lista -----")
+    con.commit()
     con.close()
+
 
 def removerPergunta():
     con = sqlite3.connect("perguntas.db")
@@ -71,7 +79,8 @@ def removerPergunta():
     id_apagar = int(input("ID da Pergunta que deseja deletar: "))
     cursor.execute('DELETE FROM perguntas WHERE id = ?',(id_apagar,))
     con.commit()
-    con.close()  
+    con.close() 
+
 
 def menuAdmQuiz():
     iniciar()
@@ -88,11 +97,9 @@ def menuAdmQuiz():
         if opcao == "1":
             limpaTela()
             inserirPergunta()
-            sleep(3)
         elif opcao == "2":
             limpaTela()
             editarPergunta()
-            sleep(3)
         elif opcao == "3":
             limpaTela()
             listarPerguntas()
@@ -100,14 +107,13 @@ def menuAdmQuiz():
         elif opcao == "4":
             limpaTela()
             removerPergunta()
-            limpaTela()
         elif opcao == "5":
             limpaTela()
             repeat = False
-            sleep(3)
         else:
             limpaTela()
             print("Opção inválida!")
-            sleep(3)
 
+
+#perguntarPerguntas()
 menuAdmQuiz()

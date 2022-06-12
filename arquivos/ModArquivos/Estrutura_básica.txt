@@ -1,0 +1,61 @@
+COMANDO print()
+O comando print() é utilizado quando desejamos imprimir alguma mensagem de texto na tela.
+
+>>Sintaxe da função print()
+Requer que se utilize os parênteses com o texto que será exibido.
+Esse texto deve ser escrito, também, entre aspas, podendo ser aspas simples ‘ ou dupla ‘’.
+Exemplo: print("Hello World")
+	 print('Hello World')
+
+Erros comuns: 
+Erros de digitação referente à caixa alta (letras maiúsculas) e à caixa baixa (letras minúsculas): 
+Print (“Hello World"); 
+PRINT (‘Hello World’)
+
+Erros de falta de parênteses ou de aspas: 
+print (Hello World; 
+print (Hello World”).
+Ao executar uma programação com erros de sintaxe, o resultado não será exibido e os erros são apontados.
+
+VARIÁVEIS
+>>Declaração de variáveis
+Na linguagem Python não é necessário declarar as variáveis no início do código. Isso pode ser feito a qualquer momento, durante a codificação.
+>>Tipos de variáveis
+Diferente da maioria das linguagens, uma variável em Python não tem um tipo fixo, apenas o tipo do conteúdo.
+Exemplos: X = 10 (será reconhecida como inteiro)
+	  Cidade = ‘Santos’ (será reconhecida como string)
+
+Também é possível identificar os tipos básicos que são: inteiro (int), real (float), lógico/booleano (bool) e string (str).
+
+TIPOS DE DADOS
+
+>>String(str)
+Representa qualquer conjunto de caracteres, desde que estejam entre aspas.
+>>Inteiro(int)
+As variáveis do tipo (int) são aquelas que armazenam números inteiros 1, 2, 3, 4 e assim por diante.
+>>Real(float)
+Representa números reais e que possuem sinal de
+expoente (e ou E)
+>>Booleano(bool)
+Representam valores booleanos que são Verdadeiro (True) e Falso (False)
+
+ENTRADA DE DADOS
+Para que possa ter uma interação do usuário tornando o programa dinâmico, temos de trabalhar com a função de entrada de dados, que no Python é conhecida como: input()
+
+Na prática:
+
+Vamos criar uma variável e acrescentar a função input.
+fruta = input("Digite o nome de uma fruta: ")
+print(fruta)
+Ao executar o programa, será exibida uma mensagem solicitando a digitação do nome de uma fruta, ao digitar alguma infomação.
+Após digitar e pressionar Enter será exibido o valor digitado pelo usuário que foi armazenado na variável fruta.
+Exemplo: 
+	 Digite o nome de uma fruta: Maça
+	 Maça
+
+Entrada de dados não string
+Quando utilizamos a entrada de dados por meio da função input, essa será considerada do tipo string. Assim, caso seja necessário realizar a entrada de valores numéricos, temos de converter o tipo de dado, de acordo com o tipo que desejamos armazenar na variável.
+>> codigo = int(input())
+Int para valores Inteiro
+>> salario = float(input())
+float para valores Real

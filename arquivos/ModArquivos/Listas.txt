@@ -1,0 +1,60 @@
+LISTAS
+Uma Lista(list) em Python, nada mais é que uma coleção ordenada de
+valores, separados por vírgula e dentro de colchetes [].
+Elas são utilizadas para armazenar diversos itens em uma única variável.
+Exemplo: 
+	lista = ["Python", "Code"]
+Saída do código:
+	["Python", "Code"]
+Podemos saber a classe de uma lista com type():
+	lista = []
+	print(type(lista))
+Saída do código:
+	<class 'list'>
+>>Operadores de lista
+O primeiro e mais básico é o operador de acesso aos seus itens a partir dos índices.
+lista = ["O carro", "azul", "número",  999]
+	     0	      1        2        3
+A lista representada acima é composta por quatro elementos, onde seus
+índice variam de zero a três, onde o primeiro objeto, no índice 0, é a string "O carro".
+tendo em mente sua organização interna, podemos acessar cada um dos elementos ultilizando 
+sintaxe list[índice].
+Exemplo:
+	print(lista[0], lista[1], lista[2], lista[3])
+Saída do código:
+	O carro azul número 999
+>>Complimento de uma lista
+O comprimento de uma lista (ou o número de itens), pode ser obtido a partir da função len().
+Exemplo: print(len(lista))
+Saída do código: 4
+
+>>Ultilizando a função append.
+O append insere um registro após o último elemento, ou seja, ele é útil
+quando é preciso colocar o novo registro na última posição da tabela.
+Exemplo:
+	lista = [2,4,6,8,10]
+	lista.append(12)
+	print(lista)
+Saída do código:
+	[2, 4, 6, 8, 10, 12]
+
+NA PRÁTICA
+Você foi contrato por uma empresa e foi solicitado que faça uma limpeza
+nos cadastros de clientes duplicados. os cadastros de clientes estão em
+uma lista e você deve gerar uma nova lista sem duplicação.
+Dica: ultilizando laços de repetição dentro de uma função.
+>>lista com o número dos clientes:
+num_clientes = [110, 111, 112, 113, 114, 110, 111, 112, 113, 114]
+
+>>função para gerar uma nova lista sem duplicação:
+def remove_duplicacao(x): # x como parametro.
+    lista = []            #Váriavel com uma lista vazia.
+    for i in x:		  #for usado para acessar cada elemento.
+      if i not in lista:  #condicional:se o i não tiver dentro da lista.
+        lista.append(i)   #append preencher a lista nova.
+    return lista   	  #retorna os elementos da nova lista.
+    
+print(remove_duplicacao(num_clientes))
+
+Saída do código:
+[110, 111, 112, 113, 114]

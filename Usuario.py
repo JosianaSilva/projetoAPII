@@ -30,17 +30,23 @@ class Usuario():
 
     def getHistorico(self):
         historico = deque([])
-        historico = deque(pk.load(open(r"arquivos\\HistoricoArquivos\\" + str(self.id) +".score", "rb")))
+        historico = deque(pk.load(open("arquivos\\HistoricoArquivos\\" + str(self.id) +".score", "rb")))
         return historico
 
     def mostrarHistorico(self):
         historico = self.getHistorico()
-        hisFormatado = ""
-        for i in range(len(historico)-1,-1,-1):
-            hisFormatado += str(historico[i]) + " "
-        print(f"""Últimas pontuções: {
-        {hisFormatado}
-        }""")
+        if len(historico)==0:
+            console.print("[yellow on black]Histórico vazio.[/]")
+
+        else:
+            hisFormatado = "\n"
+            for i in range(len(historico)-1,-1,-1):
+                hisFormatado += "► obteve "+str(historico[i])+ " pontos.\n"
+            titulo = "Ultimas pontuações de "+self.nome+":"
+            print(Panel.fit(hisFormatado, title = titulo, style="green", subtitle_align="center", border_style="blue"))
+#             print(f"""Últimas pontuções:
+
+# {hisFormatado}""")
 
     def setNome(self, novoNome):
         self.nome = novoNome
@@ -64,7 +70,7 @@ class Usuario():
         pk.dump(historicoUsuario, open("arquivos\\HistoricoArquivos\\" + str(self.id) +".score", "wb"))
         if(novaPontuacao > self.maiorPontuacao):
             self.maiorPontuacao = novaPontuacao
-            atualizaMaiorPontuacao(self.id, self.maiorPontuacao)
+            atualizaMaiorPontuacao(self.id,novaPontuacao)
     
     def getPontosQuiz(self):
         return self.pontos

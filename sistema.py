@@ -37,9 +37,11 @@ def loginAutorizado(usuario):
         executaWiki(usuario)
         loginAutorizado(usuario)
     elif(nivel_2=="2"):
-        execultarModulos()
+        limpaTela()
+        executarModulos()
         loginAutorizado(usuario)
     elif(nivel_2=="3"):
+        limpaTela()
         main_forum_menu(usuario)
         loginAutorizado(usuario)
     elif(nivel_2=="4"):
@@ -105,4 +107,4 @@ def principal():
 
 cad = cadastroUsuario("cadastroUsuarios.db")
 principal()
-limpaTela_(1)
+limpaTela()

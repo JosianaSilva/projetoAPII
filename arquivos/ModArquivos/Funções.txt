@@ -1,0 +1,59 @@
+FUNÇÕES
+Funções são estruturas que possibilitam a separação da programação em blocos.
+A implementação de funções em programas é fundamental, pois tem o objetivo de 
+otimizar o código-fonte e evitar a replicação do código.
+>>Sintaxe para aplicação.
+def nome_da_função(parâmetros):
+    <intruções>
+    return "valor do retorno"
+
+def: Determina o início da função.
+Parâmetros: São informações que a função pode receber para o seu processamento.
+Corpo da função: É o local em que é aplicada a sequência de instruções, como entrada, 
+processamento e/ou saída.
+return: Deve ser utilizado quando houver necessidade de retornar alguma informação.
+Exemplo: Para exemplificar, vamos fazer uma função simples.
+def mensagem1():
+    print("Vamos programar?")
+mensagem1() 
+
+
+def mensagem2():
+    return "Python!"
+
+
+texto = mensagem2()
+print(texto)
+		 
+Saída do código: Vamos programar?  			
+ 		 python!
+NA PRÁTICA
+Vamos criar um programa para cálculo de média de notas.
+No programa, o usuário deverá digitar duas notas para o aluno. 
+Na sequência, o programa irá calcular e exibir a média, e se o aluno está aprovado ou reprovado.
+O programa deverá ter uma função para leitura das notas e outra, para cálculo da média.
+def lernotas():
+    n = float(input("Digite sua nota: "))
+    return n
+    
+ 
+def resultado(n1, n2):
+    media = (n1+n2)/2
+    print("Nota 1: ", n1)
+    print("Nota 2: ", n2)
+    print("Média: ", media, "Resultado: ", end="")
+    if media >= 7:
+        print("Aprovado")
+    else:
+        print("Reprovado")
+
+a = lernotas()
+b = lernotas()
+resultado(a, b)
+
+Saída do código:
+Digite sua nota: 8
+Digite sua nota: 8
+Nota 1:  8.0
+Nota 2:  8.0
+Média:  8.0 Resultado: Aprovado

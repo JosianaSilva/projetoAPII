@@ -37,7 +37,7 @@ def loginAutorizado(usuario):
         executaWiki(usuario)
         loginAutorizado(usuario)
     elif(nivel_2=="2"):
-        execultarModulos()
+        executarModulos()
         loginAutorizado(usuario)
     elif(nivel_2=="3"):
         main_forum_menu(usuario)

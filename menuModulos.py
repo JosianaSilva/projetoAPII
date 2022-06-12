@@ -2,26 +2,26 @@ from modulo1 import *
 from modulo2 import *
 
 def menuModulos():
-    menu = """\033[91m
-   -- Nivel- code.Academy --\033[0m\n
+    menu = """
+   \t-- Nível- code.Academy --\n
 1 – Básico
 2 – Intermediário
-3 – Avançado
 0 – Voltar
     """
     print(menu)
 
-def execultarModulos():
+def executarModulos():
     x = ""
     while x != "0":
         limpaTela()
         menuModulos()
         x = input("Escolha um nível á ser estudado: ")
-        limpaTela()
         if x == "1":
-           execultarModulo1()
+            limpaTela()
+            executarModulo1()
         elif x == "2":
-            execultarModulo2()
+            limpaTela()
+            executarModulo2()
         elif x == "0":
             break
         else:

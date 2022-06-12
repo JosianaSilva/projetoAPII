@@ -17,7 +17,9 @@ def limpaTela_(s):
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def limpaTela():
+    print("\n"*1000)
     os.system('cls' if os.name == 'nt' else 'clear')
+    
 
 # Faz a formatação do título:
 def formataTitulo(titulo):

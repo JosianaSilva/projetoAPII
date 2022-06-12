@@ -32,14 +32,16 @@ def loginAutorizado(usuario):
     print(Panel.fit(msg))
     limpaTela_(2)
     menu_inicial()
-    nivel_2 = input()
+    nivel_2 = input().upper()
     if(nivel_2=="1"): #Wiki
         executaWiki(usuario)
         loginAutorizado(usuario)
     elif(nivel_2=="2"):
+        limpaTela()
         executarModulos()
         loginAutorizado(usuario)
     elif(nivel_2=="3"):
+        limpaTela()
         main_forum_menu(usuario)
         loginAutorizado(usuario)
     elif(nivel_2=="4"):
@@ -58,7 +60,7 @@ def loginAutorizado(usuario):
 def principal():
     limpaTela()
     menu()
-    nivel_1 = input()
+    nivel_1 = input().upper()
     
     if(nivel_1 == "1"): #Opção de Login
         def login(): 
@@ -105,4 +107,4 @@ def principal():
 
 cad = cadastroUsuario("cadastroUsuarios.db")
 principal()
-limpaTela_(1)
+limpaTela()

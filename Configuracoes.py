@@ -7,6 +7,22 @@ from functions import *
 
 database = "cadastroUsuarios.db"
 
+def atualizaPontos(_id, pts):
+    con = sqlite3.connect(database)
+    cursor =  con.cursor()
+    consulta = "UPDATE usuario SET pontos = ? WHERE _id = ?; "
+    cursor.execute(consulta, (pts, _id))
+    con.commit()
+    con.close()
+
+def atualizaMaiorPontuacao(_id, pts):
+    con = sqlite3.connect(database)
+    cursor =  con.cursor()
+    consulta = "UPDATE usuario SET maiorPontuacao = ? WHERE _id = ?; "
+    cursor.execute(consulta, (pts, _id))
+    con.commit()
+    con.close()
+
 def atualizaNome(_id, nomeNovo):
         con = sqlite3.connect(database)
         cursor =  con.cursor()
@@ -17,6 +33,7 @@ def atualizaNome(_id, nomeNovo):
         print("Nome atualizado para: ", nomeNovo)
         con.commit()
         con.close()
+
 def atualizaEmail(_id, emailNovo):
         con = sqlite3.connect(database)
         cursor =  con.cursor()
@@ -40,6 +57,16 @@ def atualizaSenha(_id, senhaNova):
         con.commit()
         con.close()
 
+def apagar(usuario):
+    id = usuario.id
+    con = sqlite3.connect(database)
+    cursor =  con.cursor()
+    consulta = "DELETE * FROM usuario WHERE _id = ?; "
+    cursor.execute(consulta, (id,))
+    print("Apagado com sucesso. ")
+    con.commit()
+    con.close()
+
 def executaConfig(usuario):
     limpaTela()
     menuConfig1()
@@ -51,7 +78,9 @@ def executaConfig(usuario):
     elif(op == "2"):
         atualizacoes(usuario)
     elif(op == "3"):
-        print("...")
+        apagar(usuario)
+    elif(op == "4"):
+        print("Saindo..")
     else:
         msgErro("Opção inválida!")
         executaConfig(usuario)

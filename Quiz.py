@@ -38,7 +38,7 @@ def perguntarPerguntas(usuario):
         else:
             print("Errou\n")
     print("pontuação adquirida:",pontuacao_atual)
-    #usuario.adicionaPontosAoHistorico(pontuacao_atual)
+    usuario.adicionaPontosAoHistorico(pontuacao_atual)
     con.commit()
     con.close()
 
@@ -68,7 +68,8 @@ def MenuQuizWorks(usuario):
             continua()
         elif optMQ=="2":
             # showMsg("Não há histórico para mostrar.","red")  
-            print(usuario.getHistorico())
+            # print(usuario.getHistorico())
+            usuario.mostrarHistorico()
             continua()
         elif optMQ=="3":
             showMsg("Em construção...","red") 
@@ -78,9 +79,9 @@ def MenuQuizWorks(usuario):
             repeat=False #quando o usuário pede para sair a condição é alterada e quebra o loop, era pra voltar pro menu principal
             limpaTela()
         else:
-            showMsg("Opção inválida!")
+            showMsg("Opção inválida!", "red")
 
 
 #chamar a função para testar:
-usuario = Usuario(7410, 'Kite', 'kite@email', 0, 0, '4781ac9273d3335229ca90e8e00a1c71')
-MenuQuizWorks(usuario)
+# usuario = Usuario(7410, 'Kite', 'kite@email', 0, 0, '4781ac9273d3335229ca90e8e00a1c71')
+# MenuQuizWorks(usuario)

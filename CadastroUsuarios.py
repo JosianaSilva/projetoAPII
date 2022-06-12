@@ -32,7 +32,7 @@ class cadastroUsuario:
         pontos = 0
         maiorPontuacao = 0
         id = random.randint(1111,9999)
-        historico = [0]
+        historico = []
 
         newUser = Usuario(nome,email,senha,pontos,maiorPontuacao,id) 
 

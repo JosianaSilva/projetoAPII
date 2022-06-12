@@ -30,7 +30,8 @@ def menuConfig1():
     menu = """
     1. Mostrar Perfil
     2. Atualizar 
-    3. Voltar
+    3. Apagar conta
+    4. Voltar
     """
     print(menu)
 

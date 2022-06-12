@@ -1,5 +1,6 @@
 from collections import deque
 import pickle as pk
+from Configuracoes import atualizaMaiorPontuacao, atualizaPontos
 from functions import *
 
 # from Configuracoes import atualizaEmail, atualizaNome, atualizaSenha
@@ -8,7 +9,7 @@ class Usuario():
         self.nome = nome
         self.email = email
         self.senha = senha
-        self.pontosQuiz = pontosQuiz
+        self.pontos = pontosQuiz
         self.maiorPontuacao = maiorPontuacao
         self.id = id
 
@@ -18,7 +19,7 @@ class Usuario():
         perfil = f"""
         ♦   [bold]Nome:[/] {self.nome}                     
         ♦   [bold]Email:[/] {self.email}                    
-        ♦   [bold]Pontos:[/] [green]{self.pontosQuiz}[/]              
+        ♦   [bold]Pontos:[/] [green]{self.pontos}[/]              
         ♦   [bold]Maior Pontuação:[/] [green]{self.maiorPontuacao}[/] 
         """
         print(Panel.fit(perfil, title="Perfil"))
@@ -31,15 +32,18 @@ class Usuario():
 
     def getHistorico(self):
         historico = deque([])
-        historico = pk.load(open("arquivos\\HistoricoArquivos\\" + str(self.id) +".score", "rb"))
+        historico = deque(pk.load(open(r"arquivos\\HistoricoArquivos\\" + str(self.id) +".score", "rb")))
         return historico
 
     def mostrarHistorico(self):
         historico = self.getHistorico()
         hisFormatado = ""
-        for ponto in historico:
-            hisFormatado += ponto + " "
-        print("(",hisFormatado," )")
+        for i in range(len(historico)-1,-1,-1):
+            hisFormatado += str(historico[i]) + " "
+            # hisFormatado += ponto + " "
+        print(f"""Últimas pontuções: {
+        {hisFormatado}
+        }""")
 
     def setNome(self, novoNome):
         self.nome = novoNome
@@ -51,31 +55,37 @@ class Usuario():
         self.email = novoEmail
 
 
-    def adicionaPontosAoHistorico(self, novo):
+    def adicionaPontosAoHistorico(self, novaPontuacao):
         historicoUsuario = self.getHistorico()
 
         tam = len(historicoUsuario)
+        
         if(tam==10):
             historicoUsuario.popleft()
-        historicoUsuario.append(novo)
-        if(tam > 10):
-            while(tam>10):
-                historicoUsuario.popleft()
+        historicoUsuario.append(novaPontuacao)
+        self.aumentaPontos(novaPontuacao)
+        # if(tam > 10):
+        #     while(tam>10):
+        #         historicoUsuario.popleft()
+
         # Na próxima linha será sobrescrito o histórico, adicionando as alterações
-        pk.dump(open("arquivos\\HistoricoArquivos\\" + str(self.id) +".score", "wb"))
-        if(novo > maiorPontuacao):
-            maiorPontuacao = novo
+        pk.dump(historicoUsuario, open("arquivos\\HistoricoArquivos\\" + str(self.id) +".score", "wb"))
+        if(novaPontuacao > self.maiorPontuacao):
+            self.maiorPontuacao = novaPontuacao
+            atualizaMaiorPontuacao(self.id, self.maiorPontuacao)
     
 
 
     def getPontosQuiz(self):
-        return self.pontosQuiz
+        return self.pontos
 
     def aumentaPontos(self, pts):
-        self.pontosQuiz += pts
-    
+        self.pontos += pts
+        atualizaPontos(self.id, self.pontos)
+
+
     def mostrarScore(self):
-        print(f"{self.nome} : {self.pontosQuiz} pontos")
+        print(f"{self.nome} : {self.pontos} pontos")
 
 # exemplo de criação de usuário:
 # user1 = user("Maria","maria@gmail.com", 1978,0,1)

@@ -1,0 +1,64 @@
+PROGRAMAÇÃO ORIENTADA A OBJETOS
+Quando falamos de POO, estamos nos referindo a um conjunto de conceitos
+e padrões que usamos para resolver problemas com objetos. Um objeto em
+Python é uma única coleção de dados (atributos) e comportamento(métodos). 
+Você pode pensar em objetos como coisas reais ao seu redor.
+
+>>Objetos
+Em Python tudo é um objeto. podemos usar a type() para verificar o tipo
+do objeto:
+Exemplo:		Saída do código:
+	print(type(1)                   <class 'int'>       
+	print(type([])                  <class 'list'>
+Então, se tudo é um objeto em Python como criar nossos próprios tidos de
+objetos?É ai que entra a class.
+>>class
+É um modelo que define a natureza de um objeto. Das clases podemos construir 
+instâncias. Vamos ver como podemos usar a palavra-chave class.
+Exemplo: class Carros(object):
+	     pass
+	 x = Exemplo()
+	 print(type(x)
+Dentro da classe temos apenas um pass(usado quando queremos que algo não
+faça nada). Mas podemos definir atributos é método para a classe.
+>>Atributos
+A sintaxe para criar um atributo é:
+self.attribute = sometring
+Existe um método especial chamado:
+__init__()
+Exemplo: class Carros(object):           Para acessar o atributos:
+	     def __init__(self, marca):                pedro.marca
+	         self.marca = marca                    joao.marca      
+         pedro = Carros(marca = "Ford")
+         joao = Carros(marca = "Mercedes")
+         
+>>Métodos
+São funções definidas dentro do corpo de uma classe. Eles são usados para executar
+operações com os atributos de nossos objetos. Sendo assim essenciais no conceito de
+encapsulamento em POO. Você pode basicamente pensar em métodos como funções que atuam
+em um Objeto que levam o próprio Objeto através do seu argumento self.
+
+Exemplo: class Circulo(object):					
+	 pi = 3.14
+ 	    #O círculo é instanciado  com um raio(o padão é 1)
+    	    def __init__(self, raio=1):
+        	self.raio = raio
+    	    #Método de cálculo da área.
+            def area(self):
+                return self.raio * self.raio * Circulo.pi
+    	    #Método que redefine o raio.
+    	    def novoRaio(self, raio):
+                self.raio = raio
+   	    #Método para obter o raio.
+            def obterRaio(self):
+	        return self.raio
+	 c = Circulo()
+	 c.novoRaio(2)
+	 print("O raio é:", c.obterRaio()) 
+	 print("A área é:", c.area())
+
+>>Herança
+É uma forma de formar novas classes usando classes que já foram definidas. As classes recém
+formadas são chamadas classes derivadas, as classes que derivamos são chamadas de classes
+base. As classes derivas substituem ou estendem a funcionalidade das classes base. 
+

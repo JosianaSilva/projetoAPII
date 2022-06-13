@@ -1,36 +1,40 @@
 OPERADORES ARITMÉTICOS
-Para a realização de cálculos matemáticos temos de utilizar os operadores aritméticos. Na linguagem Python, os operadores são representados a seguir:
+Para a realização de cálculos matemáticos temos de utilizar os operadores aritméticos. 
+Na linguagem Python, os operadores são representados a seguir:
 Adição(+); Subtração(-); Multiplicação(*); Divisão Real(/); Divisão Inteiro(//); Exponenciação(**); Resto da Divisão(%).
 
 OPERADORES RELACIONAIS
-Utilizamos os operadores relacionais para comparação, desde valores booleano á operadores relacionais para comparar caracteres, números, variáveis e expressões. Operadores são representados da seguinte forma:
+Utilizamos os operadores relacionais para comparação, desde valores booleano 
+á operadores relacionais para comparar caracteres, números, variáveis e expressões. 
+Operadores são representados da seguinte forma:
 Igual a	(==); Diferente de (!=): Maior que (>); Menor que (<); Maior ou igual a	(>=); Menor ou igual a (<=).
 
 OPERADORES LÓGICOS
-Os operadores lógicos são utilizados para combinar resultados de expressões, retornando se o resultado final é True (verdadeiro) ou False (falso). São representados, na linguagem Python por:
+Os operadores lógicos são utilizados para combinar resultados de expressões, retornando se o resultado 
+final é True (verdadeiro) ou False (falso). São representados, na linguagem Python por:
 >> E (and); OU (or); Não (not).
 
 ESTRUTURA DE DECISÃO
-Tem como finalidade comparar e efetuar um desvio de processamento do programa. Caso a condição seja verdadeira, as instruções determinadas após a instrução if serão executadas.
+Tem como finalidade comparar e efetuar um desvio de processamento do programa. Caso a condição seja verdadeira, 
+as instruções determinadas após a instrução if serão executadas.
 >>Estrutura de decisão simples if (se)
-A estrutura de condição if permite avaliar uma expressão e, se o resultado for verdadeiro, será executada uma determinada ação.
+A estrutura de condição if permite avaliar uma expressão e, se o resultado for verdadeiro, 
+será executada uma determinada ação.
 Exemplo: idade = int(input("Digite a idade da pessoa: ")
 	 	 if idada > 18:
 	 		print("Maior idade")
-Ao executar o programa caso o valor da variável seja maior que 18, portanto, a mensagem "Maior idade" será exibida na tela.
 >>Estrutura de decisão composta
-Como já vimos, caso a condição seja verdadeira, será executada a instrução contida entre o comando if, se a condição for falsa neste caso, utilizaremos o comando else(se não).
+Como já vimos, caso a condição seja verdadeira, será executada a instrução contida entre o comando if, 
+se a condição for falsa neste caso, utilizaremos o comando else(se não).
 Exemplo:idade = int(input("Digite a idade da pessoa: ")
 	 	if idada > 18:
 	 		print("Maior idade")
-	 	elif idade > 16:
-	 		print("Intanto juvenil")
 	 	else:
 		 	print("Menor idade")
 
 >>Utilizando os comandos if - elif - else
-
-se existir mais de uma condição alternativa que precise ser verificada, utilizamos a condição elif, pois ela avalia as expressões intermediárias antes do comando else.
+se existir mais de uma condição alternativa que precise ser verificada, utilizamos a condição elif, 
+pois ela avalia as expressões intermediárias antes do comando else.
 Exemplo: idade = int(input("Digite a idade da pessoa: ")
 	 if idada > 18:
 	 	print("Maior idade")
@@ -40,20 +44,24 @@ Exemplo: idade = int(input("Digite a idade da pessoa: ")
 	 	print("Menor idade")
 
 ESTRUTURAS DE REPETIÇÃO
-As estruturas de repetição, permitem que um conjunto de instruções seja executado, até que uma determinada condição seja verdadeira. Em Python são:
-
+As estruturas de repetição, permitem que um conjunto de instruções seja executado, 
+até que uma determinada condição seja verdadeira. Em Python são:
 >>For(para)
 Normalmente utilizamos a estrutura For quando sabemos quantas vezes o laço de programação deverá ser executado.
 Exemplo: for n in range(10):
 	     print(n)	
 O resultado será os números de 0 a 9, em ordem crescente.
-A variável n é incrementada em 1 (incremento padrão) e é testado se o valor de n ainda é menor do que 10, o processo se repete até que o valor de n fique maior ou igual a 10.
+A variável n é incrementada em 1 (incremento padrão) e é testado se o valor de n ainda é menor do que 10, 
+o processo se repete até que o valor de n fique maior ou igual a 10.
 
 >>While(enquanto)
-A estrutura While (enquanto), executa um determinado conjunto de instruções, enquanto a condição verificada no início permanecer verdadeira. No momento em que a condição for falsa, o processamento da rotina é desviado para fora do laço de repetição.
-Exemplo: x = 1;
+A estrutura While (enquanto), executa um determinado conjunto de instruções, enquanto a condição verificada 
+no início permanecer verdadeira. No momento em que a condição for falsa, o processamento da rotina é desviado 
+para fora do laço de repetição.
+Exemplo: x = 1
 	 while x <= 15:
-	 	print(x);
-	 	x=x+1
+	     print(x)
+	     x=x+1
 O resultado será os números de 1 a 15 na tela, em ordem crescente.
-É importante observar que, diferente da estrutura For, na estrutura While temos de inicializar a variável antes do início do laço(x=1;)e, também, realizar o incremento dentro do bloco de repetição (x=x+1;).
+É importante observar que, diferente da estrutura For, na estrutura While temos de inicializar a variável 
+antes do início do laço(x=1;)e, também, realizar o incremento dentro do bloco de repetição (x=x+1;).

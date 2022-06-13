@@ -1,27 +1,30 @@
 LINGUAGEM DE PROGRAMAÇÃO
-A linguagem de programação permite que um programador crie programas a partir de um conjunto de ordens, ações consecutivas, dados e algoritmos. 
+A linguagem de programação permite que um programador crie programas a partir de 
+um conjunto de ordens, ações consecutivas, dados e algoritmos. 
 Exemplos: Java, C#, Python, entre outras.
 
 a seguir estudaremos a linguagem Python.
-
 LINGUAGEM PYTHON
-
-A linguagem Python é considerada uma linguagem interpretada, orientada a objetos, de alto nível e com semântica dinâmica.
+A linguagem Python é considerada uma linguagem interpretada, orientada a objetos, 
+de alto nível e com semântica dinâmica.
 
 Características:
 >>Linguagem de alto nível
-Está muito mais proxíma do programador do que do dispositivo, se assemelhando mais com a linguagem humana. 
-Sendo assim ela tem como objetivo facilitar a maneira de programar, pois é mais intuitiva, amigável e fácil de aprender.
+Está muito mais proxíma do programador do que do dispositivo.
+Sendo assim ela tem como objetivo facilitar a maneira de programar, 
+pois é mais intuitiva, amigável e fácil de aprender.
 
 >>Suporta Múltiplos Paradigmas de Programação
 Imperativo ou Procedural: As instruções são passadas ao computador na sequência que devem ser executadas.
-Orientado a Objetos: Utiliza estruturas denominadas classes e objetos e sua principal característica é permitir uma programação multiplataforma. Para saber mais sobre esse paradigma, acesse esse artigo.
-Funcional: Possui como principal característica o uso de estruturas chamadas de funções. Essas funções separam o código em blocos nos quais cada um tem uma tarefa específica.
+Orientado a Objetos: Utiliza estruturas denominadas classes e objetos e sua principal característica é 
+permitir uma programação multiplataforma. Para saber mais sobre esse paradigma, acesse esse artigo.
+Funcional: Possui como principal característica o uso de estruturas chamadas de funções. 
+Essas funções separam o código em blocos nos quais cada um tem uma tarefa específica.
 
 >>Tipagem dinâmica
 Dentro de uma linguagem de programação, trabalhamos constantemente com tipos de dados.
-Ter uma tipagem dinâmica significa que o próprio programa “entende” qual tipo de dados está sendo usado e, portanto, seu tipo não precisa ser previamente declarado.
-
+Ter uma tipagem dinâmica significa que o próprio programa “entende” qual tipo de dados está sendo usado e, 
+portanto, seu tipo não precisa ser previamente declarado.
 >>Fácil aprendizagem
 >>Comunidade ativa
 >>Muitas bibliotecas/recursos

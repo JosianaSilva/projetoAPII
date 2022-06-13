@@ -1,14 +1,16 @@
 from modulo1 import *
 from modulo2 import *
 
+#
 def menuModulos():
+    formataTitulo(" Nível- code.Academy ")
     menu = """
-   \t-- Nível- code.Academy --\n
-1 – Básico
-2 – Intermediário
-0 – Voltar
+1 – Básico.
+2 – Intermediário.
+0 – Voltar.
     """
     print(menu)
+
 
 def executarModulos():
     x = ""

@@ -19,16 +19,17 @@ Ao executar uma programação com erros de sintaxe, o resultado não será exibi
 
 VARIÁVEIS
 >>Declaração de variáveis
-Na linguagem Python não é necessário declarar as variáveis no início do código. Isso pode ser feito a qualquer momento, durante a codificação.
+Na linguagem Python não é necessário declarar as variáveis no início do código. Isso pode ser feito 
+a qualquer momento, durante a codificação.
 >>Tipos de variáveis
 Diferente da maioria das linguagens, uma variável em Python não tem um tipo fixo, apenas o tipo do conteúdo.
 Exemplos: X = 10 (será reconhecida como inteiro)
 	  Cidade = ‘Santos’ (será reconhecida como string)
 
-Também é possível identificar os tipos básicos que são: inteiro (int), real (float), lógico/booleano (bool) e string (str).
+Também é possível identificar os tipos básicos que são: 
+inteiro (int), real (float), lógico/booleano (bool) e string (str).
 
 TIPOS DE DADOS
-
 >>String(str)
 Representa qualquer conjunto de caracteres, desde que estejam entre aspas.
 >>Inteiro(int)
@@ -40,21 +41,22 @@ expoente (e ou E)
 Representam valores booleanos que são Verdadeiro (True) e Falso (False)
 
 ENTRADA DE DADOS
-Para que possa ter uma interação do usuário tornando o programa dinâmico, temos de trabalhar com a função de entrada de dados, que no Python é conhecida como: input()
+Para que possa ter uma interação do usuário tornando o programa dinâmico, temos de trabalhar com a 
+função de entrada de dados, que no Python é conhecida como: input()
 
 Na prática:
-
 Vamos criar uma variável e acrescentar a função input.
 fruta = input("Digite o nome de uma fruta: ")
 print(fruta)
-Ao executar o programa, será exibida uma mensagem solicitando a digitação do nome de uma fruta, ao digitar alguma infomação.
+Ao executar o programa, será exibida uma mensagem solicitando a digitação do nome de uma fruta, ao digitar alguma 
+infomação.
 Após digitar e pressionar Enter será exibido o valor digitado pelo usuário que foi armazenado na variável fruta.
-Exemplo: 
-	 Digite o nome de uma fruta: Maça
-	 Maça
-
+Exemplo: Digite o nome de uma fruta: Maça
+	 	 Maça
 Entrada de dados não string
-Quando utilizamos a entrada de dados por meio da função input, essa será considerada do tipo string. Assim, caso seja necessário realizar a entrada de valores numéricos, temos de converter o tipo de dado, de acordo com o tipo que desejamos armazenar na variável.
+Quando utilizamos a entrada de dados por meio da função input, essa será considerada do tipo string. 
+Assim, caso seja necessário realizar a entrada de valores numéricos, temos de converter o tipo de dado, 
+de acordo com o tipo que desejamos armazenar na variável.
 >> codigo = int(input())
 Int para valores Inteiro
 >> salario = float(input())

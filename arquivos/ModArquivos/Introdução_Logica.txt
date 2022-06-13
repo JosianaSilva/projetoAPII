@@ -1,14 +1,16 @@
 RACIOCÍNIO LÓGICO
-
 Você sabia que a lógica está presente em nosso cotidiano em diversas situações? 
 Vamos analisar o seguinte contexto:
-Uma pessoa tem a rotina de acordar cedo, tomar banho, tomar café e sair para o trabalho. Podemos considerar tal rotina como um exemplo clássico de atividades que requerem uma sequência lógica na aplicação dos afazeres, para que haja sucesso em sua realização.
-Analisando o contexto, o objetivo desta tarefa era “sair para trabalhar”. Para que isso fosse possível, algumas instruções foram realizadas para o sucesso da tarefa.
-Em nosso cotidiano, para chegarmos a um resultado, seguimos um “conjunto de instruções”. Na informática, não é muito diferente! Uma instrução (comando) indica a um computador uma ação elementar a ser executada.
+Uma pessoa tem a rotina de acordar cedo, tomar banho, tomar café e sair para o trabalho. 
+Podemos considerar tal rotina como um exemplo clássico de atividades que requerem uma sequência lógica.
+Analisando o contexto, o objetivo desta tarefa era “sair para trabalhar”. Para que isso fosse possível, algumas 
+instruções foram realizadas para o sucesso da tarefa.
+Em nosso cotidiano, para chegarmos a um resultado, seguimos um “conjunto de instruções”. Na informática, não é 
+muito diferente! Uma instrução (comando) indica a um computador uma ação elementar a ser executada.
 
 INSTRUÇÕES LÓGICAS
-
-Para seguir uma sequência lógica é necessário um conjunto de instruções colocadas em ordem sequencial lógica. É portanto evidente que devemos seguir as instruçoes em uma ordem adequada, para realizar uma determinada tarefa. 
+Para seguir uma sequência lógica é necessário um conjunto de instruções colocadas em ordem sequencial lógica. 
+É portanto evidente que devemos seguir as instruçoes em uma ordem adequada, para realizar uma determinada tarefa. 
 Exemplo: Imagine a tarefa de beber água gelada.
 >>Pegue um copo.
 >>Abra a geladeira. 
@@ -19,15 +21,19 @@ Exemplo: Imagine a tarefa de beber água gelada.
 >>Beba a água do copo.
 
 INTRODUÇÃO Á LÓGICA DE PROGRAMAÇÃO
-
-Como vimos no exemplo anterior (beber água gelada), para chegarmos a um resultado uma sequência lógica é necessária, a mesma coisa acontece com a lógica de programação.
-Ao iniciar uma programação para computador, temos de ter em mente que a máquina desconhece totalmente alguns conceitos que para nós são muito óbvios. 
-Por isto, devemos descrever cada passo de forma detalhada, para que tenha uma sequência lógica na programação e, assim, o computador possa executar todas as instruções necessárias para uma determinada tarefa. Uma instrução descrita errada, perde o sentido e influencia no resultado. Precisamos colocar em prática o conjunto de todas as instruções, na ordem correta. Para tal, podemos utilizar os algoritmos.
+Como vimos no exemplo anterior (beber água gelada), para chegarmos a um resultado uma sequência lógica é necessária, 
+a mesma coisa acontece com a lógica de programação.
+Ao iniciar uma programação para computador, temos de ter em mente que a máquina desconhece totalmente alguns conceitos 
+que para nós são muito óbvios. 
+Por isto, devemos descrever cada passo de forma detalhada, para que tenha uma sequência lógica na programação e, assim, 
+o computador possa executar todas as instruções necessárias para uma determinada tarefa. Uma instrução descrita errada, 
+perde o sentido e influencia no resultado. Precisamos colocar em prática o conjunto de todas as instruções, 
+na ordem correta. Para tal, podemos utilizar os algoritmos.
 
 ALGORITMOS
-
 >>Sequência finita de passos que levam à execução de uma tarefa.
->>Simplesmente uma "receita", ou seja,apresenta uma sequência de instruções para executarmos uma tarefa ou resolver algum problema.
+>>Simplesmente uma "receita", ou seja,apresenta uma sequência de instruções para executarmos 
+uma tarefa ou resolver algum problema.
 >>Essas instruções devem ser descritas de maneira simples e objetiva.
 
 Características básicas do algoritmo
@@ -49,8 +55,11 @@ São os dados já processados, ou seja, o resultado da programação.
 
 Formas de representação
 >>Deacrição Narrativa
-Forma de representação utilizada para descrever um algoritmo de forma que o receptor da informação entenda e interprete o assunto, mesmo não conhecendo sobre algoritmos.
+Forma de representação utilizada para descrever um algoritmo de forma que o receptor da informação 
+entenda e interprete o assunto, mesmo não conhecendo sobre algoritmos.
 >>Fluxograma
 Forma de representação que utiliza símbolos gráficos para representar os algoritmos.
 >>Pseudocódigo (Portugol ou Português Estrurado)
-Esse formato consiste na definição de uma pseudolinguagem de programação, cujos comandos são em português, para representar algoritmos.
+Esse formato consiste na definição de uma pseudolinguagem de programação, cujos comandos são em português, 
+para representar algoritmos.
+

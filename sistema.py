@@ -42,7 +42,7 @@ def loginAutorizado(usuario):
         loginAutorizado(usuario)
     elif(nivel_2=="3"):
         limpaTela()
-        main_forum_menu(usuario)
+        menu_principal_forum(usuario)
         loginAutorizado(usuario)
     elif(nivel_2=="4"):
         MenuQuizWorks(usuario)

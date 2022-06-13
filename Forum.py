@@ -1,4 +1,5 @@
 from turtle import title
+from Quiz import showMsg
 from functions import *
 from Menus import menu_inicial
 from CadastroUsuarios import *
@@ -21,9 +22,9 @@ def cria_tabela_forum(): #Cria a tabela da postagens
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS posts (
     id_post INTEGER PRIMARY KEY,
-    usuario NOT NULL,
-    titulo,
-    texto,
+    usuario TEXT NOT NULL,
+    titulo VARCHAR(75),
+    texto TEXT,
     resposta TEXT,
     usuario_resposta TEXT
     );
@@ -34,18 +35,21 @@ def cria_tabela_forum(): #Cria a tabela da postagens
 def ver_posts():
     banco = sqlite3.connect("forum_database.db")
     cursor = banco.cursor()
-    cursor.execute("SELECT id_post, usuario, titulo, texto, COALESCE(resposta, 0) FROM posts;")
-    for postagens in cursor.fetchall():
-            id_do_post = postagens[0]
-            author = postagens[1]
-            titulo =  postagens[2]
-            texto = postagens[3]
-            postAtual = f"""
-    Autor: {author}
-    Título: {titulo}
-        {texto} 
-            """
-            print(Panel.fit(postAtual, title = "ID do post:"+str(id_do_post), subtitle_align="center", border_style="blue"))            
+    cursor.execute("SELECT id_post, usuario, titulo, texto FROM posts;")
+    try:
+        for postagens in cursor.fetchall():
+                id_do_post = postagens[0]
+                author = postagens[1]
+                titulo =  postagens[2]
+                texto = postagens[3]
+                postAtual = f"""
+        Autor: {author}
+        Título: {titulo}
+            {texto} 
+                """
+                print(Panel.fit(postAtual, title = "ID do post:"+str(id_do_post), subtitle_align="center", border_style="blue"))            
+    except :
+        print("Não há posts ainda!")
     banco.close()
 
 def ver_comentarios():

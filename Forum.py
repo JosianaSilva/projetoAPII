@@ -6,7 +6,8 @@ from CadastroUsuarios import *
 from Usuario import *
 
 def texto_menu_forum(): # A parte de texto dos menus.
-    print("""Fórum code.Academy
+    formataTitulo(" Fórum code.Academy ")
+    print("""
     1. Mostrar postagens
     2. Fazer uma postagem
     3. Procurar postagem
@@ -43,10 +44,11 @@ def ver_posts():
                 titulo =  postagens[2]
                 texto = postagens[3]
                 postAtual = f"""
-        Autor: {author}
-        Título: {titulo}
-            {texto} 
-                """
+    [italic cyan]Autor: {author}[/]
+    [bold cyan]Título: {titulo}[/]
+    [#008080]
+    {texto} 
+                [/]"""
                 print(Panel.fit(postAtual, title = "ID do post:"+str(id_do_post), subtitle_align="center", border_style="blue"))            
     except :
         print("Não há posts ainda!")
@@ -60,8 +62,8 @@ def ver_comentarios():
         author = comentarios[1]
         comentario = comentarios[0]
         coment_atual = f"""
-        Autor: {author}
-        Comentário:\n{comentario}
+    [italic cyan]Autor: {author}[/]
+    [#008080]Comentário:\n{comentario}[/]
         """
         print(Panel.fit(coment_atual, title = "Comentários", subtitle_align="center", border_style="blue"))
     banco.close()
@@ -91,7 +93,7 @@ def responder_post(usuario): #Faz uma resposta em um post.
 def procurar_postagem():
     banco = sqlite3.connect("forum_database.db")
     cursor = banco.cursor()
-    q_titulo = input("Palavra-chave da postagem (título)")
+    q_titulo = input("Palavra-chave da postagem (título) ")
     cursor.execute("SELECT * FROM posts WHERE titulo LIKE ? COLLATE NOCASE",('%'+ q_titulo +'%',))
     for postagens in cursor.fetchall():
             id_do_post = postagens[0]
@@ -100,11 +102,12 @@ def procurar_postagem():
             texto = postagens[3]
             respostas = postagens[4]
             postAtual = f"""
-    Autor: {author}
-    Título: {titulo}
-    Respostas: {respostas}
+    [italic cyan]Autor: {author}[/]
+    [bold cyan]Título: {titulo}[/]
 
-        {texto} 
+    [#008080]{texto}
+
+    Respostas: {respostas}[/]
             """
             print(Panel.fit(postAtual, title = "ID do post:"+str(id_do_post), subtitle_align="center", border_style="blue"))
     banco.close()
@@ -186,6 +189,7 @@ def menu_principal_forum(usuario):
     cria_tabela_forum()  
     repeat = True #Condição para manter loop
     while repeat==True:
+        limpaTela()
         texto_menu_forum()
         opcao = input("Digite sua opção:\n")
         if opcao=="1":
@@ -207,4 +211,5 @@ def menu_principal_forum(usuario):
             repeat=False #Quebra o loop e retorna ao menu
         else:
             print("Opção inválida!")
+        continua()
 

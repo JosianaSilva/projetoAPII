@@ -1,4 +1,5 @@
 from collections import deque
+from mailbox import NoSuchMailboxError
 import pickle as pk
 from Configuracoes import atualizaMaiorPontuacao, atualizaPontos
 from functions import *
@@ -29,24 +30,25 @@ class Usuario():
             print(self.historicoUsuario[h], end=" ")
 
     def getHistorico(self):
-        historico = deque([])
-        historico = deque(pk.load(open("arquivos\\HistoricoArquivos\\" + str(self.id) +".score", "rb")))
+        try: 
+            lista = pk.load(open("arquivos\\HistoricoArquivos\\" + str(self.id) +".score", "rb"))
+        except: # caso não consiga encontrar o arquivo do histórico, ser criado um novo:
+            lista = []
+            pk.dump(lista, open("arquivos\\HistoricoArquivos\\" + str(self.id) +".score", "wb"))
+        historico = deque(lista)
         return historico
 
     def mostrarHistorico(self):
         historico = self.getHistorico()
         if len(historico)==0:
             console.print("[yellow on black]Histórico vazio.[/]")
-
         else:
             hisFormatado = "\n"
             for i in range(len(historico)-1,-1,-1):
                 hisFormatado += "► obteve "+str(historico[i])+ " pontos.\n"
             titulo = "Ultimas pontuações de "+self.nome+":"
             print(Panel.fit(hisFormatado, title = titulo, style="green", subtitle_align="center", border_style="blue"))
-#             print(f"""Últimas pontuções:
-
-# {hisFormatado}""")
+     
 
     def setNome(self, novoNome):
         self.nome = novoNome

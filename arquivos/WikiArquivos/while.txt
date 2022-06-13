@@ -4,7 +4,7 @@ var_control = 1
 while(var_control <= 10):
     print("Esta é a {}ª repetição! ".format(var_control))
     var_control += 1
-Exemplo2:
+Exemplo 2:
 condicao = True
 while(condicao):
     continuar = input("Deseja continuar? (s/n)")

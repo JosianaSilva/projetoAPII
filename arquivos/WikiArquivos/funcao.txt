@@ -1,0 +1,13 @@
+função
+É um tipo de procedimento que é feito que executa determinadas ações sempre que é chamada. Pode conter parâmetros, e pode retornar valores.
+Exemplo 1:
+def multiplica(num1, num2):
+    produto = num1 * num2
+    return produto
+Exemplo 2:
+def procuraValor(alvo, lista):
+    for elemento in lista:
+        if(elemento == alvo):
+            print("Encontrado")
+            return True
+    return False

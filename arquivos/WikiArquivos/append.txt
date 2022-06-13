@@ -1,3 +1,3 @@
 append
-É uma função de listas usada para adicionar um item à lista
-    lista.append(novo_item)
+É uma função e algumas outras estruturas de dados que é usada para adicionar um item à mesma.
+lista.append(novo_item)

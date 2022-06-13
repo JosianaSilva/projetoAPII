@@ -67,13 +67,34 @@ def apagar(usuario):
     con.commit()
     con.close()
 
+def graficoHistorico(usuario):
+    import matplotlib.pylab as plt
+    pontos = []
+    if(usuario.getHistorico() == 0):
+        print("Não há gráficos de desempenho a serem exibidos.")
+    else:
+        # O seguinte trecho de código tem por objetivo fornecer uma lista de pontos que tenha
+        # a mesma quantidade de pontuações do usuário para exibição correta do gráfico:
+        tam = len(usuario.getHistorico())
+        for i in range(tam):
+            pontos.append(i)
+    lista = list(usuario.getHistorico())
+    # lista.reverse()
+    fig, axs = plt.subplots(1, 3, figsize=(9, 3), sharey=True)
+    axs[0].bar(pontos, lista)
+    axs[1].scatter(pontos, lista)
+    axs[2].plot(pontos, lista)
+    fig.suptitle("Pontos Histórico")
+    plt.show()
+
 def executaConfig(usuario):
     limpaTela()
     menuConfig1()
     op = input()
     if(op == "1"):
         usuario.mostrarPerfil()
-        continua()
+        resposta = input("Deseja ver os gráficos de desempenho? (s/n) ") 
+        graficoHistorico(usuario) if resposta=="s" else continua()
         executaConfig(usuario)
     elif(op == "2"):
         atualizacoes(usuario)

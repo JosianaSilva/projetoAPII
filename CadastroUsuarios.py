@@ -38,8 +38,6 @@ class cadastroUsuario:
 
         caminho = "arquivos\\HistoricoArquivos\\" + str(newUser.id) +".score"
         pk.dump(historico, open(caminho, "wb"))
-        #mudar essa parte para o sistema ↑
-        usersDicionario[id] = newUser
     
         con = sqlite3.connect(self.database)
         cursor = con.cursor()
@@ -79,12 +77,6 @@ class cadastroUsuario:
             return False
         con.commit()
         con.close()
-
-        # for id in usersDicionario.keys():
-        #     if(usersDicionario[id].nome == nome):
-        #         return True
-        #     else:
-        #         return False
     
 # Monta o objeto Usuário a partir do nome e compara com os dados do BD:
     def getUsuario(self, user):
@@ -119,4 +111,3 @@ class cadastroUsuario:
             return False
         con.commit()
         con.close()
-usersDicionario = {}

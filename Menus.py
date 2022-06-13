@@ -2,36 +2,42 @@ from functions import *
 
 def menu_inicial():
     formataTitulo(" code.Academy ")
-    print("\n 1. Wiki")
-    print(" 2. Módulos")
-    print(" 3. Fórum")
-    print(" 4. Quiz")
-    print(" 5. Configurações da conta")
-    print(" X. Sair")
+    menu = """
+    [bold #7B68EE]1.[/] Wiki
+    [bold #7B68EE]2.[/] Módulos
+    [bold #7B68EE]3.[/] Fórum
+    [bold #7B68EE]4.[/] Quiz
+    [bold #7B68EE]5.[/] Configurações da conta
+    [bold #7B68EE]X.[/] Sair
+    """
+    console.print(menu)
     
 def menu():
     formataTitulo(" code.Academy ")
-    print("\n1. Login")
-    print("2. Cadastro para novos usuários")
-    print("X. Sair")
+    menu = """
+    [bold blue]1.[/] Login
+    [bold blue]2.[/] Cadastro para novos usuários
+    [bold blue]X.[/] Sair 
+    """
+    console.print(menu)
 
 
 def MenuWiki():
     formataTitulo(" Wiki - code.Academy ")
     menu = """
-    1. Ver termos
-    2. Procurar termo
-    3. Voltar
+    [bold SeaGreen]1.[/] Ver termos
+    [bold SeaGreen]2.[/] Procurar termo
+    [bold SeaGreen]3.[/] Voltar
     """ 
-    print(menu)
+    console.print(menu)
 
 def menuConfig1():
     formataTitulo(" Configurações ")
     menu = """
-    1. Mostrar Perfil
-    2. Atualizar 
-    3. Apagar conta
-    4. Voltar
+    [bold blue]1.[/] Mostrar Perfil
+    [bold blue]2.[/] Atualizar 
+    [bold blue]3.[/] Apagar conta
+    [bold blue]4.[/] Voltar
     """
     print(menu)
 
@@ -39,9 +45,9 @@ def menuConfig2():
     formataTitulo(" Configurações ")
     menu = """
     O que pretende atualizar?
-    1. Nome
-    2. Email
-    3. Senha
-    4. Voltar
+    [bold blue]1.[/] Nome
+    [bold blue]2.[/] Email
+    [bold blue]3.[/] Senha
+    [bold blue]4.[/] Voltar
     """
     print(menu)

@@ -1,4 +1,3 @@
-from os import truncate
 from Menus import MenuWiki
 from functions import *
 
@@ -6,7 +5,7 @@ from functions import *
 # Esta lista é destinada aos objetos Termo
 termos = []
 # A lista a seguir contém o nome dos termos já salvos e é usada para ler os arquivos respectivos a cada termo
-termosSalvos = ["for", "append","while"]
+termosSalvos = ["append","for","funcao","while"]
 
 class Termo:
     def __init__(self, nome, definicao,exemplo):
@@ -16,15 +15,12 @@ class Termo:
         self.exemplos.append(exemplo)
      
     def mostrarTermo(self):
-        corpoTermo = self.nome + ": "+ self.definicao +"\nExemplo(s):\n\t" 
-        # divisao = 4*"----------------------------------"
-        # print(divisao)
-        console.print(" ", style="on blue", justify="center")
+        corpoTermo = self.nome + ": "+ self.definicao +"\nExemplo(s):\n\t"   
+        console.rule("« "+self.nome+" »", style=" 	#7FFFD4")
         print(corpoTermo)
         for exemplo in self.exemplos:
             for linha in exemplo:
-                print(linha) 
-        # print(divisao)
+                console.print(linha, style=" 	#008080") 
     
     def formatoTermo(self):
         corpoTermo = self.nome + ": "+ self.definicao +"\nExemplo(s):\n\t" 
@@ -38,9 +34,22 @@ class Termo:
 def adicionarTermo(termo):
     termos.append(termo)
 
-def verTermos():
-    for t in termos:
-        t.mostrarTermo()
+def verTermos(pagina):
+    for i in range(pagina):
+        termos[i].mostrarTermo()
+    resposta = input("\tAnterior (1)| Voltar (x) | Próximo (2)\n").lower()
+    if(resposta=="1" and pagina!=2):
+        limpaTela()
+        verTermos(pagina-2)
+    elif(resposta=="2" and pagina!=len(termos)):
+        limpaTela()
+        verTermos(pagina+2)
+    elif(resposta == "x"):
+        print("Saindo..")
+    else:
+        msgErro("Opção inválida!")
+        verTermos(pagina)
+        
 
 # O objetivo da seguinte função é buscar os arquivos com as informações e convertê-las em objeto
 def leArquivosdeTermos():
@@ -77,12 +86,12 @@ def executaWiki(usuario):
     opW = input()
     if(opW=="1"): #Ver todos os termos
         limpaTela()
-        verTermos()
+        verTermos(2)
         continua() #interrompe o programa e chama o método executaWiki assim q o usuário der Enter
         executaWiki(usuario)
     elif(opW=="2"): #Procurar um termo
         limpaTela()
-        palavra = input("Buscar por: ")
+        palavra = input("Buscar por: ").lower()
         procurarTermo(palavra)
         continua()
         executaWiki(usuario)

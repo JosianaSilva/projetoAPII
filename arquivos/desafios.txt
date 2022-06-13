@@ -1,0 +1,20 @@
+
+[#CDCDCD on #2F2F4F]Fatorial simples: [/]
+Construa um algoritmo que retorne ou exiba na tela o
+fatorial de um número qualquer.
+
+[#CDCDCD on #2F2F4F]De A a Z: [/]
+Construa um algoritmo que receba uma quantidade qualquer
+de nomes e depois os exiba em ordem alfabética.
+
+[#CDCDCD on #2F2F4F]Bhaskara para quê?: [/]
+Construa um algoritmo para econtrar raízes de equações
+do segundo grau "(a)X² + (b)x + (c)".
+
+[#CDCDCD on #2F2F4F]jo ken po: [/]
+crie um algoritmo que retorne os resultados de um jogo
+de pedra, papel ou tesoura para qualquer combinação.
+
+[#CDCDCD on #2F2F4F]Dev e calculista: [/]
+faça um algoritmo de uma calculadora que permita escolher
+a operação e os valores e retorne o resultado.

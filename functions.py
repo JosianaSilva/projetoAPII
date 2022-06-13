@@ -9,6 +9,7 @@ import random
 from rich.console import Console
 from rich import print
 from rich.panel import Panel
+from rich.pretty import Pretty 
 
 console = Console()
 
@@ -17,13 +18,12 @@ def limpaTela_(s):
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def limpaTela():
-    print("\n"*1000)
     os.system('cls' if os.name == 'nt' else 'clear')
     
 
 # Faz a formatação do título:
 def formataTitulo(titulo):
-    console.rule("[bold blue]"+titulo, style="on blue", align="center")
+    console.rule("[bold #4068E0]"+titulo, style="on #4068E0", align="center")
 
 # Interrompe o programa e continua a execução assim que o usuário "der" Enter
 def continua():

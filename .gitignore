@@ -1,4 +1,4 @@
 __pycache__/**/*.pyc
 /menu_inicial.cpython-310.pyc
-*.score
-*.db
+# *.score
+# *.db

@@ -116,4 +116,4 @@ def menuAdmQuiz():
 
 
 #perguntarPerguntas()
-menuAdmQuiz()
+#menuAdmQuiz()

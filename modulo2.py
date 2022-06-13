@@ -134,3 +134,4 @@ def executarModulo2():
             break               #Encerra o laço e volta ao passo anterior.
         else:
             print("Opção inválida")
+        continua()

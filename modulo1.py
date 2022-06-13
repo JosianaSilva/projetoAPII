@@ -20,7 +20,7 @@ def introducaoLogica(opcao):										#Recebe como parametro á variável opcao.
 	def abrirArquivo(caminho, opcao):								#Função usada para escolher o caminho do diretório apartir do seu SO.
 		with open (caminho,"r", encoding="utf-8") as arquivo:		#Recebe o dirétorio apartir do objeto "caminho", para leitura.
 			tx = arquivo.readlines()								#Adiciona o arquivo em uma lista para manipulação.
-			print("".join(map(str, tx[0:30])))						#Imprime na tela o arquivo já manipulado do indíce 0 ao 30.
+			print("".join(map(str, tx[0:31])))						#Imprime na tela o arquivo já manipulado do indíce 0 ao 30.
 			while opcao != "n":										
 				opcao = input("\033[93mCONTINUAR ESTUDANDO? (s/n): \033[0m")    #Laço criado para que o usuario possa continuar estudando ou não.
 				if opcao == "s":												
@@ -129,3 +129,4 @@ def executarModulo1():
 			break                    #Encerra o laço e volta ao passo anterior.
 		else:
 			print("Opção inválida")
+		continua()

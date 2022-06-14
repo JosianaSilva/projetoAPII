@@ -117,7 +117,7 @@ def executarModulo2():
     while x != "0":
         limpaTela()
         menuCapitulos2()    #Mostra as opções do menu
-        x = input("Digite uma opção desejada: ")
+        x = input("Digite a opção desejada: ")
         if x == "1":
             limpaTela()
             ler_funcoes(opcao)  #executa a função de leitura.

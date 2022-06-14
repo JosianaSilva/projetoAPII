@@ -17,7 +17,7 @@ def executarModulos():
     while x != "0":
         limpaTela()
         menuModulos()
-        x = input("Escolha um nível á ser estudado: ")
+        x = input("Escolha um nível a ser estudado: ")
         if x == "1":
             limpaTela()
             executarModulo1()
@@ -27,4 +27,4 @@ def executarModulos():
         elif x == "0":
             break
         else:
-            print("opção invalida")
+            print("Opção inválida")

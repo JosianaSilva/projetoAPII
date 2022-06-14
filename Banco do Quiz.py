@@ -2,6 +2,8 @@ import sqlite3
 from Quiz import *
 from functions import *
 
+#  Esta parte serve para admnistrar o banco de perguntas do quiz, por enquanto é preciso  #
+#  descomentar a função no final do código e rodar este arquivo para acessá-lo.           #
 
 def iniciar():
     bancoDePerguntas = sqlite3.connect("perguntas.db")
@@ -84,8 +86,8 @@ def removerPergunta():
 
 def menuAdmQuiz():
     iniciar()
-    repeat =  True
-    while repeat:
+    repetir =  True # condição de repetição é iniciada como verdadeira
+    while repetir:  # o menu segue sendo exibido após cada ação até que o usuário opte por sair
         limpaTela()
         print("""Gerenciamento de perguntas, o que quer fazer?
 1 - inserir
@@ -107,13 +109,12 @@ def menuAdmQuiz():
         elif opcao == "4":
             limpaTela()
             removerPergunta()
-        elif opcao == "5":
+        elif opcao == "5": # ao escolher sair, o usuário inverte a condição de repetição do menu
             limpaTela()
-            repeat = False
-        else:
+            repetir = False
+        else: # para qualquer entrada não válida.
             limpaTela()
             print("Opção inválida!")
 
 
-#perguntarPerguntas()
 #menuAdmQuiz()

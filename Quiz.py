@@ -1,16 +1,16 @@
 import sqlite3
-from functions import *
-from Usuario import Usuario
+from functions import * # arquivo de funções utéis
+from Usuario import Usuario # dados do usuário
 
 
-### função provisória para exibir mensagem das opções ###
-def showMsg(mensagem,color):
-    limpaTela() #limpa a tela
-    mensagem = "[on "+color+"]"+mensagem+"[/]"
-    console.print(mensagem) #exibe a mensagem
-    sleep(2) #espera 2 segundos (não precisa limpar de novo pq o menu já limpa antes de aparecer)
+def mensagemColorida(mensagem,cor):
+    limpaTela() # limpa a tela
+    mensagem = "[on "+cor+"]"+mensagem+"[/]" # formata para colorido
+    console.print(mensagem) # exibe a mensagem
+    sleep(2) # espera 2 segundos
 
-## exibe o quiz para o usuário responder e somar pontos
+
+# exibe o quiz para o usuário responder e somar pontos
 def perguntarPerguntas(usuario):
     pontuacao_atual = 0
     con = sqlite3.connect("perguntas.db")
@@ -34,29 +34,31 @@ def perguntarPerguntas(usuario):
     con.commit()
     con.close()
     
-#exibe os jogadores em ordem por pontuação acumulada
+
+# exibe os jogadores em ordem por pontuação acumulada
 def mostrarRanking():
     formataTitulo(" Ranking de Pontos acumulados: ")
-
-    listaJogadores = []
+    listaJogadores = [] # lista vazia para armazenar
     con = sqlite3.connect("cadastroUsuarios.db")
     cursor = con.cursor()
-    cursor.execute("SELECT _id, nome, pontos FROM usuario")
-    tuplasJogadores = cursor.fetchall()
+    cursor.execute("SELECT _id, nome, pontos FROM usuario") # seleciona informaçoes necessárias
+    tuplasJogadores = cursor.fetchall() # guarda tudo em tuplas
     con.commit()
     con.close()
-
-    for jogador in tuplasJogadores:
+    for jogador in tuplasJogadores: # armazena as tuplas numa lista
         listaJogadores.append(jogador)
     legenda = "Posição | Ponto    | Usuário"
-    print(Panel(legenda,style="#32556E"))
-    for n, i in enumerate(sorted(listaJogadores, key=lambda j: j[2], reverse=True), 1): #função anonima lambda
-        # print(f"   {n}º   |   {i[2]}   -  {i[1]}\n---------------------------")
+    print(Panel(legenda,style="#32556E")) #outra função de texto colorido
+    # a seguir: enumerate para percorrer indexando a partir do 1 (1º,2º...)
+    #           sorted com reverse true, para ordenar as pontuações em ordem decrescente
+    #           função anônima lambda para indicar o elemento para basear a ordenação das tuplas (j[n][2])
+    for n, i in enumerate(sorted(listaJogadores, key=lambda j: j[2], reverse=True), 1):
         rankingString = f"{n}º     |    {i[2]}     |    {i[1]}"
         print(Panel(Pretty(rankingString,justify="left"),style="#32556E"))
     print()
 
-# Função para sugerir desafios ao usuário:
+
+# sugere desafios ao usuário, escritas em um arquivo de texto:
 def mostrarDesafios():
     formataTitulo(" Desafios Bônus ")
     with(open("arquivos\\desafios.txt", "r",encoding="utf-8")) as leituraArquivo:
@@ -65,8 +67,8 @@ def mostrarDesafios():
     console.print(texto)
 
 
-# Função para exibir o menu:
-def MenuQuizShow():
+# exibe as opções do menu:
+def textoMenuQuiz():
     limpaTela()
     formataTitulo(" menu de quizes - code.Academy ")
     print("""1. Iniciar Quiz
@@ -77,14 +79,14 @@ def MenuQuizShow():
 """)
 
 
-#Função para transitar no menu#
-def MenuQuizWorks(usuario):  
-    repeat = True #coloquei uma condição qualquer para manter um loop
-    while repeat==True:
-        MenuQuizShow()
+# função principal do quiz
+def menuQuiz(usuario):  
+    repetir = True # condição de repetição é iniciada como verdadeira
+    while repetir: # o menu segue sendo exibido após cada ação até que o usuário opte por sair
+        textoMenuQuiz()
         optMQ = input()
         if optMQ=="1":
-            showMsg("[on red]Instrução:[/] responda com a letra da alternativa.","black")
+            mensagemColorida("[on red]Instrução:[/] responda com a letra da alternativa.","black")
             limpaTela()
             perguntarPerguntas(usuario)
             continua()
@@ -100,13 +102,13 @@ def MenuQuizWorks(usuario):
             limpaTela()
             mostrarDesafios()
             continua()       
-        elif optMQ=="5":
-            repeat=False #quando o usuário pede para sair a condição é alterada e quebra o loop, era pra voltar pro menu principal
+        elif optMQ=="5": # ao escolher sair, o usuário inverte a condição de repetição do menu
+            repetir=False 
             limpaTela()
-        else:
-            showMsg("Opção inválida!", "red")
+        else: # para qualquer entrada não válida.
+            mensagemColorida("Opção inválida!", "red")
 
 
-#usuario exemplo pra entrar direto quiz por aqui e função para chamar o menu do quiz:
-#usuario = Usuario(7410, 'Kite', 'kite@email', 0, 0, '4781ac9273d3335229ca90e8e00a1c71')
-#MenuQuizWorks(usuario) 
+# usuario exemplo pra entrar direto no quiz por aqui e função para chamar o menu do quiz:
+# usuario = Usuario(7410, 'Kite', 'kite@email', 0, 0, '4781ac9273d3335229ca90e8e00a1c71')
+# menuQuiz(usuario) 

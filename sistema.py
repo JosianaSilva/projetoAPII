@@ -45,7 +45,7 @@ def loginAutorizado(usuario):
         menu_principal_forum(usuario)
         loginAutorizado(usuario)
     elif(nivel_2=="4"):
-        MenuQuizWorks(usuario)
+        menuQuiz(usuario)
         loginAutorizado(usuario)
     elif(nivel_2=="5"):
         executaConfig(usuario)

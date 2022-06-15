@@ -1,5 +1,4 @@
 from turtle import title
-from Quiz import showMsg
 from functions import *
 from Menus import menu_inicial
 from CadastroUsuarios import *
@@ -17,17 +16,22 @@ def texto_menu_forum(): # A parte de texto dos menus.
     7. Ver comentários
     8. Sair""")
 
-def cria_tabela_forum(): #Cria a tabela da postagens
+def cria_tabela_forum(): #Cria a tabela da postagens e comentáruios
     banco = sqlite3.connect("forum_database.db")
     cursor = banco.cursor()
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS posts (
     id_post INTEGER PRIMARY KEY,
     usuario TEXT NOT NULL,
-    titulo VARCHAR(75),
-    texto TEXT,
-    resposta TEXT,
-    usuario_resposta TEXT
+    titulo TEXT NOT NULL,
+    texto TEXT NOT NULL
+    );
+    """)
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS respostas (
+    usuario_resposta TEXT NOT NULL,
+    id_resposta INTEGER NOT NULL,
+    resposta TEXT NOT NULL
     );
     """)
     banco.commit()
@@ -54,18 +58,18 @@ def ver_posts():
         print("Não há posts ainda!")
     banco.close()
 
-def ver_comentarios():
+def ver_respostas(): 
     banco = sqlite3.connect("forum_database.db")
     cursor = banco.cursor()
     qual_id = input("Digite o ID do post que você deseja ver os comentários:\n")        
-    for comentarios in cursor.execute("SELECT resposta, usuario_resposta FROM posts where id_post = ?",(qual_id)):
-        author = comentarios[1]
-        comentario = comentarios[0]
+    for comentarios in cursor.execute("SELECT * FROM respostas WHERE id_resposta = ?",(qual_id)):
+        author = comentarios[0]
+        comentario = comentarios[2]
         coment_atual = f"""
-    [italic cyan]Autor: {author}[/]
-    [#008080]Comentário:\n{comentario}[/]
+    [bold italic cyan]Autor: {author}[/]
+    [#008080]Resposta:\n{comentario}[/]
         """
-        print(Panel.fit(coment_atual, title = "Comentários", subtitle_align="center", border_style="blue"))
+        print(Panel.fit(coment_atual, title = "Comentário:", subtitle_align="center", border_style="blue"))
     banco.close()
 
 
@@ -85,29 +89,27 @@ def responder_post(usuario): #Faz uma resposta em um post.
     cursor = banco.cursor()
     qual_id = int(input("Digite o ID do post que você irá responder:\n"))
     resposta = input("Digite sua resposta:\n")
-    cursor.execute("UPDATE posts SET resposta = ?, usuario_resposta = ? WHERE id_post = ?;",(resposta, usuario.nome, qual_id))
+    cursor.execute("INSERT INTO respostas VALUES(?,?,?);",(usuario.nome, qual_id, resposta))
     banco.commit()
     print("Resposta postada!")
     banco.close()    
 
-def procurar_postagem():
+def procurar_postagem(): #procura uma postagem de acordo com palavra-chave do título.
     banco = sqlite3.connect("forum_database.db")
     cursor = banco.cursor()
     q_titulo = input("Palavra-chave da postagem (título) ")
-    cursor.execute("SELECT * FROM posts WHERE titulo LIKE ? COLLATE NOCASE",('%'+ q_titulo +'%',))
-    for postagens in cursor.fetchall():
-            id_do_post = postagens[0]
+    cursor.execute("SELECT * FROM posts WHERE titulo LIKE ? COLLATE NOCASE",('%'+ q_titulo +'%',)) 
+    for postagens in cursor.fetchall(): # O COLLATE NOCASE a cima é para que a pesquisa não seja "case-sensitive".
+            id_do_post = postagens[0] #Ou seja, não importa se o caractere é minúsculo ou maiúsculo
             author = postagens[1]
             titulo =  postagens[2]
             texto = postagens[3]
-            respostas = postagens[4]
             postAtual = f"""
     [italic cyan]Autor: {author}[/]
     [bold cyan]Título: {titulo}[/]
 
     [#008080]{texto}
 
-    Respostas: {respostas}[/]
             """
             print(Panel.fit(postAtual, title = "ID do post:"+str(id_do_post), subtitle_align="center", border_style="blue"))
     banco.close()
@@ -206,7 +208,7 @@ def menu_principal_forum(usuario):
         elif opcao=="6":
             responder_post(usuario)
         elif opcao=="7":
-            ver_comentarios()
+            ver_respostas()
         elif opcao=="8":
             repeat=False #Quebra o loop e retorna ao menu
         else:

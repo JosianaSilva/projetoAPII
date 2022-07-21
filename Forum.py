@@ -4,6 +4,8 @@ from Menus import menu_inicial
 from CadastroUsuarios import *
 from Usuario import *
 
+database = "forum_database.db"
+
 def texto_menu_forum(): # A parte de texto dos menus.
     formataTitulo(" Fórum code.Academy ")
     print("""
@@ -16,9 +18,9 @@ def texto_menu_forum(): # A parte de texto dos menus.
     7. Ver comentários
     8. Sair""")
 
-def cria_tabela_forum(): #Cria a tabela da postagens e comentáruios
-    banco = sqlite3.connect("forum_database.db")
-    cursor = banco.cursor()
+def cria_tabela_forum(): #Cria a tabela das postagens e comentários
+    banco = sqlite3.connect(database)
+    cursor = banco.cursor() 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS posts (
     id_post INTEGER PRIMARY KEY,
@@ -37,29 +39,40 @@ def cria_tabela_forum(): #Cria a tabela da postagens e comentáruios
     banco.commit()
     banco.close()
 
-def ver_posts():
-    banco = sqlite3.connect("forum_database.db")
+
+def contador_resposta2(): ##função ainda em fase de testes
+    banco = sqlite3.connect(database)
     cursor = banco.cursor()
-    cursor.execute("SELECT id_post, usuario, titulo, texto FROM posts;")
-    try:
-        for postagens in cursor.fetchall():
-                id_do_post = postagens[0]
-                author = postagens[1]
-                titulo =  postagens[2]
-                texto = postagens[3]
-                postAtual = f"""
-    [italic cyan]Autor: {author}[/]
-    [bold cyan]Título: {titulo}[/]
-    [#008080]
-    {texto} 
-                [/]"""
-                print(Panel.fit(postAtual, title = "ID do post:"+str(id_do_post), subtitle_align="center", border_style="blue"))            
-    except :
-        print("Não há posts ainda!")
+    for y in cursor.execute("SELECT id_resposta, COUNT(resposta) FROM respostas GROUP BY id_resposta"):
+        print(f" ID:{y[0]} \n Qtd respostas:{y[1]} ")
     banco.close()
+    
+#contador_resposta2()
+
+def ver_posts():
+    banco = sqlite3.connect(database)
+    cursor = banco.cursor()
+    cursor.execute("SELECT EXISTS (SELECT id_post FROM posts);")
+    if cursor.fetchall()[0][0] != 0:  
+        for post in cursor.execute("SELECT * FROM posts"): #id == post[0] #texto == post[3]
+            postagem = f"""
+[bold]Autor: {post[1]} [/]
+Título: {post[2]} 
+
+{post[3]}"""
+            print(Panel(postagem, expand = False, title ="[bold cyan]ID do post: " + str(post[0]), border_style="blue"))
+    else:
+        nao_existe = "[red]Não existe nenhuma postagem ainda!"
+        print(Panel(nao_existe, expand = False, border_style="white"))
+
+
+
+
+
+
 
 def ver_respostas(): 
-    banco = sqlite3.connect("forum_database.db")
+    banco = sqlite3.connect(database)
     cursor = banco.cursor()
     qual_id = input("Digite o ID do post que você deseja ver os comentários:\n")        
     for comentarios in cursor.execute("SELECT * FROM respostas WHERE id_resposta = ?",(qual_id)):
@@ -76,26 +89,38 @@ def ver_respostas():
 def novo_post(usuario): #Adiciona um post ao banco de dados.
     print("Fazer um post:")
     titulo = (input("Título:\n"))
-    texto = input("Texto:\n")
-    banco = sqlite3.connect("forum_database.db")
+    conteudo = []
+    while True: # Cria um loop para o usuário inserir quantos inputs quiser.
+        try:
+            texto = input("\nPressione Ctrl + Z e aperte Enter para postar!\n")
+        except EOFError: # Quando Ctrl Z é pressionado, ele chama o EOFError
+            break
+        conteudo.append(texto) #O conteúdo digitado vai para a lista "conteúdo"
+        conver = "\n".join(map(str,conteudo)) #A lista é convertida em string.
+                # ^ Adiciona quebra de linha a cada elemento
+    banco = sqlite3.connect(database)
     cursor = banco.cursor()
-    cursor.execute("INSERT OR IGNORE INTO posts (usuario, titulo, texto) VALUES (?,?,?)",(usuario.nome,titulo,texto))
+    cursor.execute("INSERT OR IGNORE INTO posts (usuario, titulo, texto) VALUES (?,?,?)",(usuario.nome,titulo,conver))
     print("Postado!")               
     banco.commit()
     banco.close()
+    
 
 def responder_post(usuario): #Faz uma resposta em um post.
-    banco = sqlite3.connect("forum_database.db")
+    banco = sqlite3.connect(database)
     cursor = banco.cursor()
-    qual_id = int(input("Digite o ID do post que você irá responder:\n"))
-    resposta = input("Digite sua resposta:\n")
-    cursor.execute("INSERT INTO respostas VALUES(?,?,?);",(usuario.nome, qual_id, resposta))
-    banco.commit()
-    print("Resposta postada!")
-    banco.close()    
+    try:
+        qual_id = int(input("Digite o ID do post que você irá responder:\n"))
+        resposta = input("Digite sua resposta:\n")
+        cursor.execute("INSERT INTO respostas VALUES(?,?,?);",(usuario.nome, qual_id, resposta))
+        banco.commit()
+        print("Resposta postada!")
+        banco.close()
+    except ValueError:
+        print("O ID deve ser um valor inteiro!")   
 
 def procurar_postagem(): #procura uma postagem de acordo com palavra-chave do título.
-    banco = sqlite3.connect("forum_database.db")
+    banco = sqlite3.connect(database)
     cursor = banco.cursor()
     q_titulo = input("Palavra-chave da postagem (título) ")
     cursor.execute("SELECT * FROM posts WHERE titulo LIKE ? COLLATE NOCASE",('%'+ q_titulo +'%',)) 
@@ -116,7 +141,7 @@ def procurar_postagem(): #procura uma postagem de acordo com palavra-chave do t�
 
 def editar_postagem(): #Edita uma postagem com base no ID do post.
     ver_posts()
-    banco = sqlite3.connect("forum_database.db")
+    banco = sqlite3.connect(database)
     with banco:
         cursor = banco.cursor()
         repeat = True
@@ -159,7 +184,7 @@ def editar_postagem(): #Edita uma postagem com base no ID do post.
 
 
 def deletar_post():
-    banco = sqlite3.connect("forum_database.db")
+    banco = sqlite3.connect(database)
     cursor = banco.cursor()
     repeat = True
     while repeat == True:
@@ -189,7 +214,7 @@ def deletar_post():
 def menu_principal_forum(usuario):
     limpaTela()
     cria_tabela_forum()  
-    repeat = True #Condição para manter loop
+    repeat = True 
     while repeat==True:
         limpaTela()
         texto_menu_forum()
@@ -210,8 +235,9 @@ def menu_principal_forum(usuario):
         elif opcao=="7":
             ver_respostas()
         elif opcao=="8":
-            repeat=False #Quebra o loop e retorna ao menu
+            repeat=False
         else:
             print("Opção inválida!")
         continua()
 
+#menu_principal_forum(Usuario("Tester","aa","123",1,1,123))

@@ -89,6 +89,7 @@ def ver_respostas():
 def novo_post(usuario): #Adiciona um post ao banco de dados.
     print("Fazer um post:")
     titulo = (input("Título:\n"))
+    print("Texto:")
     conteudo = []
     while True: # Cria um loop para o usuário inserir quantos inputs quiser.
         try:
@@ -97,7 +98,7 @@ def novo_post(usuario): #Adiciona um post ao banco de dados.
             break
         conteudo.append(texto) #O conteúdo digitado vai para a lista "conteúdo"
         conver = "\n".join(map(str,conteudo)) #A lista é convertida em string.
-                # ^ Adiciona quebra de linha a cada elemento
+                # ^ Adiciona quebra de linha ao final de cada elemento
     banco = sqlite3.connect(database)
     cursor = banco.cursor()
     cursor.execute("INSERT OR IGNORE INTO posts (usuario, titulo, texto) VALUES (?,?,?)",(usuario.nome,titulo,conver))
@@ -106,16 +107,21 @@ def novo_post(usuario): #Adiciona um post ao banco de dados.
     banco.close()
     
 
-def responder_post(usuario): #Faz uma resposta em um post.
+def responder_post(usuario): #Adiciona uma resposta a um post caso exista um post com aquele ID
     banco = sqlite3.connect(database)
     cursor = banco.cursor()
     try:
         qual_id = int(input("Digite o ID do post que você irá responder:\n"))
-        resposta = input("Digite sua resposta:\n")
-        cursor.execute("INSERT INTO respostas VALUES(?,?,?);",(usuario.nome, qual_id, resposta))
-        banco.commit()
-        print("Resposta postada!")
-        banco.close()
+        cursor.execute("SELECT EXISTS (SELECT id_post FROM posts WHERE id_post = ?);", (qual_id,))
+        if cursor.fetchall()[0][0] != 0:                
+            resposta = input("Digite sua resposta:\n")
+            cursor.execute("INSERT INTO respostas VALUES(?,?,?);",(usuario.nome, qual_id, resposta))
+            banco.commit()
+            print("Resposta postada!")
+            banco.close()
+        else:
+            nao_existe = "[red]Não existe nenhuma postagem com esse ID!"
+            print(Panel(nao_existe, expand = False, border_style="white"))
     except ValueError:
         print("O ID deve ser um valor inteiro!")   
 
